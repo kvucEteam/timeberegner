@@ -97,7 +97,7 @@ $(document).ready(function() {
                 $(".flexible").removeClass("valgfag btn-success");
             }
 
-
+console.log("hej");
 
 
         }
