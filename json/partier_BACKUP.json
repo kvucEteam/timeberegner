@@ -1,0 +1,125 @@
+{
+    "userInterface": {
+        "header": "kredsløbet som økosystem",
+        "instruktion_fordeling": "Placer partierne på den vandrette fordelingspolitiske akse <br/>Fordelingspolitik handler om fordelingen af de materielle goder i samfundet. Fordelingspolitiske emner er fx skat, den offentlige sektors størrelse, grad af lighed og ulighed, kontanthjælp og SU.<br/><span class='btn btn-borre btn-info btn-sm'>Læs mere </span>",
+        "instruktion_vaerdi": "Værdipolitik handler om hvilke værdier og principper der skal vægtes i samfundet. Værdipolitiske emner er fx retspolitik, udlændingepolitik og miljøpolitik samt national/international og traditionel/moderne.<br/><span class='btn btn-borre btn-info btn-sm'>Læs mere </span>",
+        "titel": "Partiernes placering"
+    },
+    "partier": [{
+        "Partinavn": "De Nye Borgerlige",
+        "Listenavn": "D",
+        "pic": "img/d.svg",
+        "f_politik": "Nye Borgerlige markerer sig på mange enkeltsager med holdninger om hårdere retspolitik, strammere asyl- og udlændingepolitik, lavere ulandsbistand og mindre fokus på miljø og klima. De har meget til fælles med nationalkonservatismen og er meget kritiske over, at Danmark afgiver suverænitet til EU.",
+        "v_politik": "",
+        "x_placering": 4.3,
+        "alt_x_placering": [4, 5],
+        "y_placering": [4.5],
+        "alt_y_placering": [4,5]
+
+    }, {
+        "Partinavn": "Enhedslisten",
+        "Listenavn": "Ø",
+        "pic": "img/oe.svg",
+        "f_politik": "Enhedslisten kalder sig rød/grønne. De har fokus på global ulighed. De prioriterer miljø og klima meget højt og mener ulandsbistanden skal øges. De har fokus på alternativer til fængselsstraf. De mener asyl- og udlændingepolitikken skal lempes og støtter multikulturalisme. De er kritiske over for EU.",
+        "v_politik": "",
+        "x_placering": -4.1,
+        "alt_x_placering": [-5, -4],
+        "y_placering": [-4.5],
+        "alt_y_placering": [-4,-5]
+
+    }, {
+        "Partinavn": "Alternativet",
+        "Listenavn": "Å",
+        "pic": "img/aa.svg",
+        "f_politik": "Alternativet har en grøn ideologi og har fokus på global ulighed. De prioriterer miljø og klima meget højt og mener ulandsbistanden skal øges. De har fokus på alternativer til fængselsstraf. De mener asyl- og udlændingepolitikken skal lempes og støtter multikulturalisme. De går ind for et grønnere EU.",
+        "v_politik": "",
+        "x_placering": -1.3,
+        "alt_x_placering": [-2, -1, 0],
+        "y_placering": [-4],
+        "alt_y_placering": [-4,-5]
+
+    }, {
+        "Partinavn": "Socialdemokratiet",
+        "Listenavn": "A",
+        "pic": "img/a.svg",
+        "f_politik": "Socialdemokratiet har rykket sig over midten på værdipolitikken. De går nu ind for strammere udlændinge- og asylpolitik kombineret med prioritering af integration, hårdere retspolitik og lavere ulandsbistand. Socialdemokratiet prioriterer miljø og klima relativt højt, og mener at miljøindsats og vækst skal ske samtidig. De støtter EU.",
+        "v_politik": "",
+        "x_placering": -0.5,
+        "alt_x_placering": [-1, 0, 1],
+        "y_placering": [0.5],
+        "alt_y_placering": [-1, 0, 1, 2]
+    }, {
+        "Partinavn": "Radikale Venstre",
+        "Listenavn": "B",
+        "pic": "img/b.svg",
+        "f_politik": "Radikale Venstre prioriterer miljø og klima højt, og mener at miljøindsats og vækst skal ske samtidig. De mener ulandsbistanden skal øges. De har fokus på forebyggelse i forhold til kriminalitet. De mener asyl- og udlændingepolitikken skal lempes. De er stærke tilhængere af EU.",
+        "v_politik": "",
+        "x_placering": 1.2,
+        "alt_x_placering": [0, 1, 2],
+        "y_placering": [-3],
+        "alt_y_placering": [-4,-3,-2]
+
+    }, {
+        "Partinavn": "Dansk Folkeparti",
+        "Listenavn": "O",
+        "pic": "img/o.svg",
+        "f_politik": "Dansk Folkeparti markerer sig på mange enkeltsager med holdninger om hårdere retspolitik, strammere asyl- og udlændingepolitik, lavere ulandsbistand og mindre fokus på miljø og klima. De har meget til fælles med nationalkonservatismen og er meget kritiske over, at Danmark afgiver suverænitet til EU.",
+        "v_politik": "",
+        "x_placering": 0.5,
+        "alt_x_placering": [2, 1, 0],
+        "y_placering": [4],
+        "alt_y_placering": [4,5]
+
+    }, {
+        "Partinavn": "Socialistisk Folkeparti",
+        "Listenavn": "F",
+        "pic": "img/f.svg",
+        "f_politik": "Socialistisk Folkeparti har også fokus på global ulighed. De prioriterer miljø og klima meget højt og mener ulandsbistanden skal øges. De har fokus på alternativer til fængselsstraf. De mener asyl- og udlændingepolitikken skal lempes og støtter multikulturalisme. Men de er rykket tættere på Socialdemokratiet og midten i forhold til udlændingepolitikken. De går ind for et grønnere EU.",
+        "v_politik": "",
+        "x_placering": -2.5,
+        "alt_x_placering": [-3,-2,-1],
+        "y_placering": [-2],
+        "alt_y_placering": [-3,-2,-1]
+
+    }, {
+        "Partinavn": "Venstre",
+        "Listenavn": "V",
+        "pic": "img/v.svg",
+        "f_politik": "Venstre går ind for hårdere retspolitik og strammere udlændinge- og asylpolitik. De vægter vækst i industri og landbrug højt. De ønsker lavere ulandsbistand. De støtter et stærkt EU.",
+        "v_politik": "",
+        "x_placering": 2.3,
+        "alt_x_placering": [1, 2, 3],
+        "y_placering": [2],
+        "alt_y_placering": [2,3,4]
+
+    }, {
+        "Partinavn": "Konservativt Folkeparti",
+        "Listenavn": "C",
+        "pic": "img/c.svg",
+        "f_politik": "Konservative Folkeparti går ind for hårdere retspolitik og strammere udlændinge- og asylpolitik. De markerer sig nogle gange som ’grønne borgerlige’ med fokus på miljø og klima. De ønsker en højere ulandsbistand end de andre borgerlige partier. De har fokus på nationale værdier, men støtter EU.",
+        "v_politik": "",
+        "x_placering": 3,
+        "alt_x_placering": [2, 3, 4],
+        "y_placering": [3],
+        "alt_y_placering": [2,3,4]
+
+    }, {
+        "Partinavn": "Liberal Alliance",
+        "Listenavn": "I",
+        "pic": "img/i.svg",
+        "f_politik": "Liberal Alliance har fokus på vækst før miljø og klima. De har på mange områder en hård retspolitik samt stram udlændinge- og asylpolitik. De ønsker lavere ulandsbistand. De støtter et EU, der har fokus på det indre marked og handel.",
+        "v_politik": "",
+        "x_placering": 3.65,
+        "alt_x_placering": [4, 5],
+        "y_placering": [2],
+        "alt_y_placering": [1,2,3]
+
+    }],
+    "info_tekster": [
+        "Til venstre på den fordelingspolitiske akse er de socialistiske holdninger med lighed, stor omfordeling, høj skat, stor stat og regulering af markedet.",
+        "Til højre på den fordelingspolitiske akse er de liberalistiske holdninger med ulighed, lille omfordeling, lav skat, lille stat og marked frem for stat.",
+        "En venstreorienteret værdipolitik har holdninger, der støtter multikulturalisme, det internationale og det moderne, miljø før vækst, forebyggelse frem for straf og højere ulandsbistand.", 
+        "En højreorienteret værdipolitik har holdninger med fokus på det nationale, traditioner, en strammere udlændingepolitik, vækst før miljø, hårdere straffe og lavere ulandsbistand."
+
+    ]
+}

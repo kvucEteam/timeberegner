@@ -1,0 +1,155 @@
+{
+    "semesterdimser": [{
+        "header": "Merit",
+        "visible": false
+    }, {
+        "header": "Efterår 2018",
+        "visible": true
+    }, {
+        "header": "Forår 2019",
+        "visible": true
+    }, {
+        "header": "Efterår 2019",
+        "visible": true
+    }, {
+        "header": "Forår 2020",
+        "visible": true
+    }, {
+        "header": "Efterår 2020",
+        "visible": false
+    }, {
+        "header": "Forår 2021",
+        "visible": false
+    }, {
+        "header": "Efterår 2021",
+        "visible": false
+    }, {
+        "header": "Forår 2022",
+        "visible": false
+    }, {
+        "header": "Efterår 2022",
+        "visible": false
+    }, {
+        "header": "Forår 2023",
+        "visible": false
+    }, {
+        "header": "Udvidet fagpakke",
+        "visible": false
+    }],
+    "knapper": [{
+            "tekst": "Tilføj semester",
+            "selectedIndex": 1
+        }, {
+            "tekst": "Fjern semester"
+        }, {
+            "tekst": "Merit"
+        }, {
+            "tekst": "Aktiver udvidet fagpakke"
+        }
+
+    ],
+    "fag": [{
+            "text": "Dansk A",
+            "obligatorisk": true,
+            "helaar": true,
+            "udd_timer": 260,
+            "su_timer": 20
+        }, {
+            "text": "Engelsk B",
+            "obligatorisk": true,
+            "helaar": true,
+            "udd_timer": 105,
+            "su_timer": 11.5
+        }, {
+            "text": "Matematik C",
+            "obligatorisk": true,
+            "helaar": true,
+            "udd_timer": 67.5,
+            "su_timer": 11.5
+        }, {
+            "text": "Historie B",
+            "obligatorisk": true,
+            "helaar": true,
+            "udd_timer": 150,
+            "su_timer": 12.5
+        }, {
+            "text": "Religion C",
+            "obligatorisk": true,
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Samfundsfag C",
+            "obligatorisk": true,
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Biologi C",
+            "obligatorisk": true,
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Geografi C",
+            "obligatorisk": true,
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Kemi C",
+            "obligatorisk": true,
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Engelsk C",
+            "obligatorisk": false,
+            "valgfag" : true,
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Dans C",
+            "obligatorisk": "flexible",
+            "valgfag" : true,
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Billedkunst C",
+            "obligatorisk": "flexible",
+            "valgfag" : true,
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Musik C",
+            "obligatorisk": "flexible",
+            "valgfag" : true,
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Mediefag C",
+            "obligatorisk": "flexible",
+            "valgfag" : true,
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Design C",
+            "obligatorisk": "flexible",
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }, {
+            "text": "Dramatik C",
+            "obligatorisk": "flexible",
+            "helaar": false,
+            "udd_timer": 75,
+            "su_timer": 6.5
+        }
+
+    ]
+}

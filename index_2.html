@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Partiernes fordelings- og værdipolitik</title>
+    <meta name="author" content="ato">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../library/css/styles.css" type="text/css">
+    <link rel="stylesheet" href="time.css" type="text/css">
+    <!-- <title>Simple Map</title> -->
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>Timeberegning</h1>
+        <div class="col-xs-12">
+            <div class="instr_container"></div>
+            <div id="explanationwrapper"></div>
+        </div>
+        <div id="semester_app">
+            <div class="col-xs-12 knap_container">
+                <button v-for="todo in knapper" v-on:click="doSomething(todo.text)" class="btn btn-info btn-var">{{ todo.text }}</button>
+            </div>
+            <div v-for="todo in semesterdimser" v-show="todo.visible" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 semester_container">
+                <div class="semester_content ">
+                    <div class="semester_title ">
+                        {{ todo.header }}
+                    </div>
+                    <div class="time_count">SU timer i semester: 0</div>
+                </div>
+            </div>
+            <div class="row"></div>
+            <div class="feedback col-xs-12">Uddannelsestimer: 0</div>
+            <div class="dragzone col-xs-12">
+                <span v-for="todo in fag" v-if="todo.helaar == true" class="btn btn-primary btn-xs draggable fag_btn helaar">{{ todo.text}} (<span class="num">{{ todo.udd_timer}} / {{ todo.su_timer}}</span>)</span>
+                <p class="drag_header">Valgfag:
+                    <p/>
+                    <span v-for="todo in fag" v-if="todo.helaar == false" class="btn btn-default btn-xs draggable fag_btn">{{ todo.text}} (<span class="num">{{ todo.udd_timer}} / {{ todo.su_timer}} </span>)</span>
+            </div>
+        </div>
+    </div>
+    <!-- 
+        <div id="posX "></div>
+        <div id="posY "></div>
+ -->
+    </div>
+    <!-- </div> -->
+    <!-- 
+    <div class="console ">
+        <div class="koordinatsystem_size "></div>
+        <div class="partipos ">
+    </div>
+ -->
+</body>
+<script src="../library/vendor_scripts.js "></script>
+<script src="../library/custom_scripts.js "></script>
+ <script type="text/javascript">
+        $(document).ready(function() {
+            getAjaxData("GET ", "json/time.json", false, "json ");
+            one_line_footer();
+        });
+</script>
+
+
+
+<script type="text/javascript " src="time.js "></script>
+</body>
+
+</html>
