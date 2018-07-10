@@ -317,6 +317,18 @@
             "helaar": false,
             "udd_timer": 75,
             "su_timer": 6.5
+        },{
+            "text": "SSO",
+            "obligatorisk": true,
+            "helaar": false,
+            "udd_timer": 25,
+            "su_timer": 0
+        },{
+            "text": "EP",
+            "obligatorisk": true,
+            "helaar": false,
+            "udd_timer": 25,
+            "su_timer": 0
         }
 
 

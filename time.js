@@ -24,6 +24,10 @@ $(document).ready(function() {
         microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b><br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + jsonData.fag[indeks].su_timer);
     })
 
+    $(".su_timer").click(function() {
+        clicked_SU($(this));
+    });
+
     $(".semester_content, .dragzone").droppable({
 
         accept: ".fag_btn",
@@ -64,7 +68,7 @@ $(document).ready(function() {
 
 
                     microhint(ui.draggable, "Du har placeret et fag som kan tages både halv og helårligt. Træk det samme fag op i et andet semester for at tage det over et helt år.")
-                    //ui.draggable.append("<div class='helaarlabel'>Helårligt</div>")
+                        //ui.draggable.append("<div class='helaarlabel'>Helårligt</div>")
                     var klon = ui.draggable.clone().appendTo(".dragzone"); //insertBefore("#fag_1");//prependTo(".dragzone");
                     klon.fadeOut(0).fadeIn(1000);
                     $(".draggable").draggable({ revert: "invalid" });
@@ -84,31 +88,33 @@ $(document).ready(function() {
             var flexible_dropped = 0;
 
 
-            $(".flexible").each(function(index){
-                if ($(this).hasClass("dropped")){
+            $(".flexible").each(function(index) {
+                if ($(this).hasClass("dropped")) {
 
-                    flexible_dropped ++
+                    flexible_dropped++
                 }
             });
 
-            if (flexible_dropped > 0){
+            if (flexible_dropped > 0) {
                 $(".flexible").removeClass("obligatorisk btn-primary")
                 $(".flexible").addClass("valgfag btn-success");
 
-            }else{
+            } else {
                 $(".flexible").addClass("obligatorisk btn-primary")
                 $(".flexible").removeClass("valgfag btn-success");
             }
 
             var last_letter = ui.draggable.html();
-            last_letter = last_letter[last_letter.length-1]
+            last_letter = last_letter[last_letter.length - 1]
 
-            if (last_letter == "B" || last_letter == "C" ){
+            if (last_letter == "A") {
 
-                microhint(ui.draggable, "hej")
+                microhint(ui.draggable, "Et fag på " + last_letter + " niveau kræver, at du har haft faget på B-niveau.")
+            } else if (last_letter == "B") {
+                microhint(ui.draggable, "Et fag på " + last_letter + " niveau kræver, at du har haft faget på C-niveau ")
             }
 
-console.log("hej");
+            console.log("hej");
 
 
         }
@@ -147,7 +153,7 @@ function init() {
     /* lav containere */
 
     for (var i = 0; i < jsonData.semesterdimser.length; i++) {
-        $("#semester_app").append("<div class ='semester_container col-lg-3 col-md-4 col-sm-6 col-xs-12'><div class='semester_content '><div class='semester_title'>" + jsonData.semesterdimser[i].header + "</div> <div class='time_count btn btn-xs'> SU timer: 0 </div> </div> </div>")
+        $("#semester_app").append("<div class ='semester_container col-lg-3 col-md-4 col-sm-6 col-xs-12'><div class='semester_content '><div class='semester_title'>" + jsonData.semesterdimser[i].header + "</div> <div class='su_timer btn btn-xs'> SU timer: 0 </div> </div> </div>")
 
         if (i < 1) {
             $(".semester_container").eq(i).hide();
@@ -179,12 +185,18 @@ function init() {
 
 
     }
+
+//Placer SSO i sidste container:
+
+    $("#fag_44").appendTo($(".semester_content").eq(4));
 }
 
 
 
 
 function udregn_timer() {
+
+
 
     var duplicate_fag_Array = [];
 
@@ -236,21 +248,23 @@ function udregn_timer() {
 
             });
 
-            $(".time_count").eq(index).html("SU-timer:" + su_timer);
-            if (su_timer >= 23 && su_timer <= 26) {
-                $(".time_count").eq(index).addClass("btn-success");
-                $(".time_count").eq(index).removeClass("btn-danger");
+            $(".su_timer").eq(index).html("SU-timer:" + su_timer);
+            if (su_timer >= 23 && su_timer <= 37) {
+                $(".su_timer").eq(index).addClass("btn-success");
+                $(".su_timer").eq(index).removeClass("btn-danger");
             } else if (su_timer >= 26) {
-                $(".time_count").eq(index).addClass("btn-danger");
-                $(".time_count").eq(index).removeClass("btn-success");
+                $(".su_timer").eq(index).addClass("btn-danger");
+                $(".su_timer").eq(index).removeClass("btn-success");
             } else {
-                $(".time_count").eq(index).removeClass("btn-success");
-                $(".time_count").eq(index).removeClass("btn-danger");
+                $(".su_timer").eq(index).removeClass("btn-success");
+                $(".su_timer").eq(index).removeClass("btn-danger");
             }
 
             totalTimer += udd_timer;
 
-            $(".feedback").html("Uddannelsestimer:" + totalTimer);
+            $(".feedback").html("Uddannelsestimer: " + totalTimer);
+
+
 
             if (totalTimer >= min_timer && totalTimer <= max_timer) {
                 $(".feedback").addClass("btn btn-success");
@@ -327,4 +341,22 @@ function nav_click(text) {
     }
     udregn_timer();
 
+}
+
+function clicked_SU(object) {
+
+    var parentID = object.parent().index(".semester_content");
+    //var SU_timer = object.text();
+
+    console.log("SU_timer:  " + SU_timer);
+    var SU_timer = parseFloat(object.text().replace(/([^0-9\\.])/g, ""));
+
+    if (SU_timer < 23) {
+
+        microhint(object, SU_timer + " SU-timer er ikke nok til at opnå SU. DU skal have minimum 23 SU-timer om ugen");
+    } else if (SU_timer > 37) {
+        microhint(object, SU_timer + " SU-timer er for mange til hvad vi anbefaler om ugen. Prøv at flytte et fag til et andet semester.");
+    } else {
+        microhint(object, SU_timer + " SU-timer er et passende antal timer på en uge.");
+    }
 }
