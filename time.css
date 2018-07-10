@@ -53,4 +53,15 @@
 }
 
 
-
+.helaarlabel{
+        color: white;
+    position: absolute;
+    background-color: red;
+    font-size: 9px;
+    border-radius: 4px;
+    padding: 2px 1px 1px 2px;
+    transform: rotate(-3deg);
+    right: -4px;
+    top: 22px;
+    opacity: .9;
+}
