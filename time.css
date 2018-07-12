@@ -1,20 +1,17 @@
 .semester_container {
     margin-bottom: 20px;
-
 }
 
-.knap_container{
+.knap_container {
     margin-bottom: 20px;
 }
 
-.dragzone{
-    border-radius: 4px;
-    border: 1px dashed grey;
+.dragzone {
     min-height: 30px;
     margin-top: 20px;
 }
 
-.semester_content{
+.semester_content {
     padding: 10px;
     background-color: #ddd;
     min-height: 110px;
@@ -22,46 +19,70 @@
     border: 1px solid #999;
     border-radius: 3px;
 }
-.feedback{
-        width: auto;
-    margin-left: 15px;
-    border: 2px solid #999;
+
+.feedback, .fag_status {
+    
+    margin-right: 15px;
+    
     border-radius: 6px;
+    padding: 4px;
 }
 
-.su_timer{
+
+
+.su_timer {
     font-size: 11px;
     position: absolute;
     right: -16px;
     top: 4px;
 }
 
-.fag_btn{
-    margin: 3px; 
-}
-
-.btn-var{
+.fag_btn {
     margin: 3px;
 }
 
-.draggable{
+.btn-var {
+    margin: 3px;
+}
+
+.draggable {
     z-index: 100;
 }
 
-.drag_header{
+.drag_header {
     margin: 5px;
 }
 
-
-.helaarlabel{
-        color: white;
+.helaarlabel {
+    color: black;
     position: absolute;
-    background-color: red;
+    background-color: white;
     font-size: 9px;
     border-radius: 4px;
-    padding: 2px 1px 1px 2px;
-    transform: rotate(-3deg);
+    padding: 1px 3px 0px 3px;
+    transform: rotate(0deg);
     right: -4px;
     top: 22px;
     opacity: .9;
+}
+
+.btn_exp {
+    margin: 0px;
+}
+
+.custom_glyphs {
+    color: #777;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.ok_glyph{
+    color: #777;
+    margin-left: -15px;
+    opacity: .2;
+}
+
+.complete_ok_glyph{
+    color: green;
+    opacity: 1;
 }
