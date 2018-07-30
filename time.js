@@ -2,6 +2,13 @@ var min_timer = 1705;
 var max_timer = 1755;
 var semestre = 4;
 
+ var valgfag = 0,
+        kreative_fag = 0,
+        obligatoriske_fag = 0,
+        sso = true,
+        ep = false, 
+        totalTimer = 0;
+
 
 $(document).ready(function() {
 
@@ -20,7 +27,11 @@ $(document).ready(function() {
     $(".fag_btn").click(function() {
         var indeks = $(this).attr("id");
         indeks = parseInt(indeks.substring(4, indeks.length));
-        microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b><br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + jsonData.fag[indeks].su_timer);
+        if (jsonData.fag[indeks].forklaring) {
+        microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b><br/><em>" + jsonData.fag[indeks].forklaring + "</em><br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + jsonData.fag[indeks].su_timer);
+    }else{
+         microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b><br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + jsonData.fag[indeks].su_timer);
+    }
     });
 
     $(".btn_exp").click(function() {
@@ -29,6 +40,10 @@ $(document).ready(function() {
 
     $(".su_timer").click(function() {
         clicked_SU($(this));
+    });
+
+    $(".feedback_container").click(function() {
+       clicked_feedback($(this));
     });
 
     $(".semester_content, .dragzone").droppable({
@@ -45,7 +60,7 @@ $(document).ready(function() {
 
                 top: 0,
                 left: 0,
-                margin: "0px 4px 0px 0px",
+                margin: "4px",
                 //width: $(this).width() + "px"
             });
 
@@ -183,11 +198,13 @@ function init() {
         } else if (jsonData.fag[i].fagtype == "valgfag") {
             $(".fag_btn").eq(i).addClass("valgfag btn-success");
         } else if (jsonData.fag[i].fagtype == "udvidet") {
-            $(".fag_btn").eq(i).addClass("udvidet btn-info");
+            $(".fag_btn").eq(i).addClass("udvidet btn-warning");
         }
 
         if (jsonData.fag[i].helaar == true) {
-            $(".fag_btn").addClass("helaar");
+            //alert("jsonData.fag[i].helaar : " +i +  jsonData.fag[i].helaar);
+
+            $(".fag_btn").eq(i).addClass("helaar");
         }
 
 
@@ -199,7 +216,7 @@ function init() {
 
     //Placer SSO i sidste container:
 
-    $("#fag_45").appendTo($(".semester_content").eq(4));
+    $("#fag_43").appendTo($(".semester_content").eq(4));
     udregn_timer();
 }
 
@@ -209,7 +226,7 @@ function init() {
 function udregn_timer() {
 
     var duplicate_fag_Array = [];
-    var valgfag = 0,
+    valgfag = 0,
         kreative_fag = 0,
         obligatoriske_fag = 0,
         sso = true,
@@ -233,7 +250,7 @@ function udregn_timer() {
 
 
 
-    var totalTimer = 0;
+    totalTimer = 0;
 
 
 
@@ -281,7 +298,7 @@ function udregn_timer() {
 
             });
 
-            $(".su_timer").eq(index).html("SU-timer:" + su_timer);
+            $(".su_timer").eq(index).html("SU-timer: " + su_timer);
             if (su_timer >= 23 && su_timer <= 37) {
                 $(".su_timer").eq(index).addClass("btn-success");
                 $(".su_timer").eq(index).removeClass("btn-danger");
@@ -295,7 +312,7 @@ function udregn_timer() {
 
             totalTimer += udd_timer;
 
-            $(".feedback").html("Uddannelsestimer: " + totalTimer);
+            $(".feedback").html("Uddannelsestimer: " + totalTimer + "/" + min_timer);
 
 
 
@@ -383,6 +400,7 @@ function set_height_containers() {
 }
 
 
+
 function nav_click(text, object) {
 
     var indeks = object.index(".btn-var");
@@ -425,13 +443,16 @@ function nav_click(text, object) {
             object.html("Aktiver udvidet fagpakke <span class='glyphicons glyphicons-education'></span>");
             $(".btn_exp").eq(2).fadeOut();
             $(".udvidet").fadeOut();
+            min_timer = 1705;
+            max_timer = 1755;
 
         } else {
             $(".semester_container").eq(11).fadeIn();
             object.html("Deaktiver udvidet fagpakke <span class='glyphicons glyphicons-education'></span>");
             $(".btn_exp").eq(2).fadeIn();
             $(".udvidet").fadeIn();
-
+min_timer = 1905;
+            max_timer = 1955;
         }
 
 
@@ -472,4 +493,13 @@ function clicked_btn_exp(object) {
         microhint(object, "Den udvidede fagpakke giver adgang til lange videregående uddannelser. Du skal vælge et valgfag der løfter fra C til B-niveau og et fag du løfter fra B til A-niveau. Fagene skal være relevante for den uddannelse du drømmer om.");
     }
 
+}
+
+function clicked_feedback(object){
+
+    var HTML= "";
+ 
+    HTML += "Du skal have " + min_timer + " uddannelses-timer for at have en fuld hf. Fag du tidligere har gennemført kan placereres i meritfag. <br/>Du skal desuden placere alle de obligatoriske fag, 1 kreativt fag og 3-5 valgfag.";
+    
+    microhint(object, HTML)
 }

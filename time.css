@@ -34,7 +34,7 @@
     font-size: 11px;
     position: absolute;
     right: -16px;
-    top: 4px;
+    bottom: 4px;
 }
 
 .fag_btn {
@@ -85,4 +85,14 @@
 .complete_ok_glyph{
     color: green;
     opacity: 1;
+}
+.semester_title{
+    margin-top: -29px;
+    font-size: 12px;
+    margin-left: -10px;
+}
+
+.feedback_container{
+    cursor: pointer;
+    width: auto;
 }
