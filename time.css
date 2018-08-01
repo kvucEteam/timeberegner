@@ -90,9 +90,14 @@
     margin-top: -29px;
     font-size: 12px;
     margin-left: -10px;
+    margin-bottom: 5px;
 }
 
 .feedback_container{
     cursor: pointer;
     width: auto;
+}
+
+.videre_container{
+    margin-top: 20px;
 }

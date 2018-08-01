@@ -30,12 +30,12 @@
             <span class="feedback">Uddannelsestimer: 0</span><span class="timer_ok_glyph ok_glyph glyphicon glyphicon-ok "></span> <span class="fag_status">Obligatoriske fag</span><span class="obl_fag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span> <span class="fag_status">Kreativt fag</span><span class="krea_fag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span><span class="fag_status">Valgfag</span><span class="valgfag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span>
         </div>
         <div class="col-xs-12">
-            
             <h4>Træk fagene herfra til hvert semester: </h4>
             <div class="">
                 <button class="btn btn-xs btn-primary btn_exp">Obligatoriske fag </button>
                 <button class="btn btn-xs btn-success btn_exp">Valgfag </button>
                 <button class="btn btn-xs btn-warning btn_exp">Udvidet fagpakke </button>
+                
             </div>
         </div>
         <div class="dragzone col-xs-12">
@@ -44,6 +44,10 @@
         <div id="posX "></div>
         <div id="posY "></div>
  -->
+        <div class="col-xs-12 videre_container">
+            <div class="download-btn btn btn-info" "=" "><span class="glyphicons glyphicons-download-alt "></span> Hent uddannelsesplan</div>
+            <div class="send_email btn btn-info " "=" "><span class="glyphicons glyphicons-download-alt "></span> Bestil vejledning</div></div>
+    </div>
     </div>
     <!-- </div> -->
     <!-- 
@@ -55,6 +59,9 @@
 </body>
 <script src="../library/vendor_scripts.js "></script>
 <script src="../library/custom_scripts.js "></script>
+<script src="../library/js/html-docx.js">
+</script>
+<script src="../library/js/filesaver.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     getAjaxData("GET", "json/time.json", false, "json ");
