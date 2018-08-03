@@ -7,7 +7,7 @@ var valgfag = 0,
     obligatoriske_fag = 0,
     sso = true,
     ep = false,
-    totalTimer = 0, 
+    totalTimer = 0,
     autoudfyldt = false;
 
 
@@ -65,6 +65,8 @@ $(document).ready(function() {
         accept: ".fag_btn",
         tolerance: "touch",
         drop: function(e, ui) {
+
+
 
             if ($(this).hasClass("semester_content")) {
                 ui.draggable.addClass("dropped")
@@ -149,6 +151,16 @@ $(document).ready(function() {
             console.log("hej");
 
 
+            if (ui.draggable.attr("id") == "fag_9") {
+                var drop_title = $(this).find(".semester_title").html();
+                if (drop_title[0] == "E") {
+                    microhint($(this), "Du kan kun skrive SSO i et forårssemester")
+                    ui.draggable.appendTo(".dragzone");
+                }
+            }
+
+
+
         }
 
 
@@ -169,6 +181,8 @@ $(document).ready(function() {
 
     $(".btn_exp").eq(2).hide();
     $(".udvidet").hide();
+
+    $("#fag_9, #fag_10").css("background-color", "rgb(135, 150, 220");
 
 
 
@@ -230,7 +244,7 @@ function init() {
 
     //Placer SSO i sidste container:
 
-    $("#fag_43").appendTo($(".semester_content").eq(4));
+    //$("#fag_43").appendTo($(".semester_content").eq(4)); // SSO autoplacering nu udkommenteret
     udregn_timer();
 }
 
@@ -313,10 +327,10 @@ function udregn_timer() {
         });
 
         $(".su_timer").eq(index).html("SU-timer: " + su_timer);
-        if (su_timer >= 23 && su_timer <= 37) {
+        if (su_timer >= 23 && su_timer <= 30) {
             $(".su_timer").eq(index).addClass("btn-success");
             $(".su_timer").eq(index).removeClass("btn-danger");
-        } else if (su_timer >= 26) {
+        } else if (su_timer >= 30.1) {
             $(".su_timer").eq(index).addClass("btn-danger");
             $(".su_timer").eq(index).removeClass("btn-success");
         } else {
@@ -439,6 +453,7 @@ function nav_click(text, object) {
         } else {
             microhint($(".knap_container"), "Du kan maksimalt arbejde med 10 semestre");
         }
+        $(".semester_title").eq(11).html(jsonData.semesterdimser[semestre + 1].header + " (udvidet fagpakke)");
     }
     if (indeks == 1) {
         if (semestre > 1) {
@@ -449,9 +464,11 @@ function nav_click(text, object) {
         } else {
             microhint($(".knap_container"), "Du skal have minimum 1 semester");
         }
+        $(".semester_title").eq(11).html(jsonData.semesterdimser[semestre + 1].header + " (udvidet fagpakke)");
     }
 
     if (indeks == 2) {
+
         if ($(".semester_container").eq(11).is(":visible")) {
             console.log("IT IS VISIBLE!");
             $(".semester_container").eq(11).fadeOut();
@@ -463,7 +480,9 @@ function nav_click(text, object) {
             max_timer = 1755;
 
         } else {
+
             $(".semester_container").eq(11).fadeIn();
+            $(".semester_title").eq(11).html(jsonData.semesterdimser[semestre + 1].header + " (udvidet fagpakke)");
             object.html("Deaktiver udvidet fagpakke <span class='glyphicons glyphicons-education'></span>");
             $(".btn_exp").eq(2).fadeIn();
             $(".udvidet").fadeIn();
@@ -475,16 +494,16 @@ function nav_click(text, object) {
 
     }
     if (indeks == 4) {
-        object.html("Fjern fag <span class='glyphicon glyphicon-remove'></span>");
+        object.html("Fjern alle fag <span class='glyphicon glyphicon-remove'></span>");
         if (autoudfyldt == false) {
             autoudfyldt = true
             autoudfyld();
-        }else if (autoudfyldt == true){
+        } else if (autoudfyldt == true) {
             object.html("Automatisk udfyldning <span class='glyphicon glyphicon-barcode'></span>");
-            autoudfyldt = false; 
+            autoudfyldt = false;
             $(".fag_btn").appendTo(".dragzone");
         }
-        
+
 
 
     }
@@ -503,7 +522,7 @@ function clicked_SU(object) {
     if (SU_timer < 23) {
 
         microhint(object, SU_timer + " SU-timer er ikke nok til at opnå SU. DU skal have minimum 23 SU-timer om ugen");
-    } else if (SU_timer > 37) {
+    } else if (SU_timer > 30) {
         microhint(object, SU_timer + " SU-timer er for mange til hvad vi anbefaler om ugen. Prøv at flytte et fag til et andet semester.");
     } else {
         microhint(object, SU_timer + " SU-timer er et passende antal timer på en uge.");
@@ -632,8 +651,14 @@ function autoudfyld() {
     $(".fag_btn").appendTo(".dragzone");
     for (var i = 0; i < jsonData.fag.length; i++) {
         if (jsonData.fag[i].placering) {
-            console.log(jsonData.fag[i].text + " skal autoplaceres i " + jsonData.fag[i].placering);
-            $(".semester_content").eq(jsonData.fag[i].placering).append($("#fag_" + i));
+            if (jsonData.fag[i].helaar == true) {
+                console.log(jsonData.fag[i].text + " skal autoplaceres i " + jsonData.fag[i].placering);
+
+                $(".semester_content").eq(jsonData.fag[i].placering).append($("#fag_" + i));
+
+                var klon = $("#fag_" + i).clone(); //.prependTo(".dragzone");
+                 $(".semester_content").eq(jsonData.fag[i].placering_2).append(klon);
+            }
         }
     }
 
