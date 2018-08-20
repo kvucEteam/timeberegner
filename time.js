@@ -9,10 +9,13 @@ var valgfag = 0,
     ep = false,
     totalTimer = 0,
     autoudfyldt = false,
-    udvidet_fagpakke = false;
+    udvidet_fagpakke = false,
+    merit = false;
 
 
 $(document).ready(function() {
+
+
 
     rotateCheck();
 
@@ -105,7 +108,7 @@ $(document).ready(function() {
 
             var id_length = $("." + this_id).length;
 
-            console.log("id_length: " + id_length);
+            //console.log("id_length: " + id_length);
 
 
             if ($(this).hasClass("semester_content") && id_length < 2) {
@@ -224,6 +227,7 @@ $(document).ready(function() {
     $("#fag_9, #fag_10").css("background-color", "rgb(135, 150, 220");
 
 
+    loadData();
 
 
 });
@@ -250,13 +254,13 @@ function init() {
         }
     }
 
-
+    $(".semester_container").eq(0).hide();
 
 
     /*lav fag_draggables */
 
     for (var i = 0; i < jsonData.fag.length; i++) {
-        console.log("I: " + i);
+        //console.log("I: " + i);
         $(".dragzone").append("<span id ='fag_" + i + "' timestamp ='" + i + "' class='fag_" + i + " btn btn-xs draggable fag_btn'>" + jsonData.fag[i].text + "</span"); //(<span class='num'>" + jsonData.fag[i].udd_timer + "/" + jsonData.fag[i].su_timer + "</span>)</span>");
         if (jsonData.fag[i].fagtype == "obligatorisk") {
             $(".fag_btn").eq(i).addClass("obligatorisk btn-primary");
@@ -284,7 +288,7 @@ function init() {
     //Placer SSO i sidste container:
 
     //$("#fag_43").appendTo($(".semester_content").eq(4)); // SSO autoplacering nu udkommenteret
-    udregn_timer();
+    //udregn_timer();
     make_overlay();
 }
 
@@ -304,6 +308,10 @@ function udregn_timer() {
         obligatoriske_fag = 0,
         sso = true,
         ep = false;
+
+    var saveData = [
+        [udvidet_fagpakke, semestre, autoudfyldt, merit]
+    ];
 
     /* ER der placeret flere af samme fag?? */
 
@@ -329,8 +337,15 @@ function udregn_timer() {
 
     $(".semester_content").each(function(index) {
 
+
+        saveData.push([]);
+
         var udd_timer = 0;
         var su_timer = 0;
+
+        var semester_indeks = index;
+
+        console.log("semester_indeks: " + semester_indeks);
 
 
         $(this).find($(".fag_btn")).each(function(index) {
@@ -338,6 +353,19 @@ function udregn_timer() {
 
             var indeks = $(this).attr("id");
             indeks = parseInt(indeks.substring(4, indeks.length));
+
+
+            /**
+             *
+             * Indsæt Data i saveData*/
+
+            saveData[semester_indeks + 1].push($(this).attr("id"));
+
+            console.log("saveData: ", saveData);
+
+            /*
+             */
+
 
             /* check hvis der er en duplikate og halver timetallet */
 
@@ -434,6 +462,12 @@ function udregn_timer() {
 
 
 
+    $(".saveConsole").html(saveData);
+
+
+    osc.save('timeData', saveData);
+
+
 
 }
 
@@ -441,7 +475,7 @@ function set_height_containers() {
 
     //$(".semester_content").css("min-height", "300px")
 
-    
+
 
     var maks_height = 0;
     var height = 0;
@@ -491,9 +525,11 @@ function nav_click(text, object) {
             $(".semester_container").eq(0).fadeOut();
             object.html("Aktiver tidligere gennemførte fag <span class='custom_glyphs glyphicon glyphicon-floppy-disk'></span>");
             $(".semester_container").eq(0).find(".fag_btn").appendTo(".dragzone");
+            merit = false;
         } else {
             $(".semester_container").eq(0).fadeIn();
             object.html("Deaktiver tidligere gennemførte fag <span class='custom_glyphs glyphicon glyphicon-floppy-disk'></span>");
+            merit = true;
         }
     }
 
@@ -568,6 +604,8 @@ function nav_click(text, object) {
             UserMsgBox_xclick("body", "Er du sikker på, at du vil fjerne alle fag fra alle semestre?<br/><button class='btn_accept_udfyld btn-sm btn btn-success'>Ja</button><button class='btn_reject_udfyld btn-sm btn btn-danger'>Nej</button>");
 
             $(".btn_accept_udfyld").click(function() {
+                udregn_timer();
+                setTimeout(function(){ window.location.reload(); }, 300);
                 window.location.reload();
             })
             $(".btn_reject_udfyld").click(function() {
@@ -753,7 +791,6 @@ function autoudfyld(udfyld_type) {
         } else if (index < semestre) {
             $(this).show();
         }
-
     })
 
     $(".semester_container").eq(0).hide();
@@ -880,3 +917,98 @@ function addListeners() {
 /*=====  End of Sorter divs efter ID  ======*/
 
 
+function loadData() {
+
+    //var jsonData = {"A": {"A1": 1, "A2": 2, "A3": 3}, "B": {"B1": 1, "B2": 2, "B3": 3}}; 
+
+
+    window.osc = Object.create(objectStorageClass);
+    //osc.save('timeData', jsonData);
+    //osc.init('studentSession_Time');
+    //osc.exist('timeData');
+
+    // osc.startAutoSave('test1', [1,2,3], 500);
+    // osc.setAutoSaveMaxCount('test1', 5);
+
+    // osc.startAutoSave('test2', [4,5,6], 1000);
+    // osc.setAutoSaveMaxCount('test2', 10);
+
+    // osc.startAutoSave('test3', [7,8,9], 1500);
+    // osc.setAutoSaveMaxCount('test3', 15);
+
+    var TjsonData = osc.load('timeData');
+    console.log('returnLastStudentSession - TjsonData: ' + JSON.stringify(TjsonData));
+
+    
+
+    console.log(TjsonData[0]);
+    semestre = TjsonData[0][1];
+    udvidet_fagpakke = TjsonData[0][0];
+    autoudfyldt = false; //TjsonData[0][2];
+    merit = TjsonData[0][3];
+
+
+    $(".semester_container").each(function(index) {
+        if (index > semestre) {
+            $(this).hide();
+        } else if (index < semestre) {
+            $(this).show();
+        }
+    })
+
+
+    if (merit == false) {
+        $(".semester_container").eq(0).hide();
+    }
+
+    if (udvidet_fagpakke == true) {
+        $(".btn-var").eq(2).html("Deaktiver udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
+        $(".btn_exp").eq(2).fadeIn(0);
+        $(".udvidet").fadeIn(0);
+        min_timer = 1905;
+        max_timer = 1955;
+    }
+
+    if (autoudfyldt == true){
+        $(".btn-var").eq(4).html("Fjern alle fag <span class='custom_glyphs glyphicon glyphicon-remove'></span>");
+    }
+
+
+
+    for (var i = 1; i < semestre + 2; i++) {
+        console.log("i:" + (i - 1));
+        for (var o = 0; o < TjsonData[i].length; o++) {
+
+            $(".semester_content").eq(i - 1).append($("#" + TjsonData[i][o]));
+            console.log("TjsonfData: " + (i - 1) + ": " + TjsonData[i][o]);
+
+        }
+    }
+
+
+    sortDivs();
+    set_height_containers();
+    udregn_timer();
+    /*
+        if (udfyld_type != "udvidet") {
+            //alert ("SÅ er der Pølle!");
+            udvidet_fagpakke = false;
+            //object.html("Deaktiver udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
+            $(".btn_exp").eq(2).fadeOut();
+            $(".udvidet").fadeOut();
+            min_timer = 1705;
+            max_timer = 1755;
+
+            for (var i = 0; i < jsonData.fag.length; i++) {
+                if (jsonData.fag[i].placering) {
+                    $(".semester_content").eq(jsonData.fag[i].placering).append($("#fag_" + i));
+                    if (jsonData.fag[i].helaar == true) {
+                        console.log(jsonData.fag[i].text + " skal autoplaceres i " + jsonData.fag[i].placering);
+                        var klon = $("#fag_" + i).clone(); //.prependTo(".dragzone");
+                        klon.addClass("clone");
+                        $(".semester_content").eq(jsonData.fag[i].placering_2).append(klon);
+                    }
+                }
+            }
+        }*/
+}
