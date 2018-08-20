@@ -21,22 +21,22 @@
             <div class="instr_container"></div>
             <div id="explanationwrapper"></div>
         </div>
+        <div class="col-xs-12 labelcontainer">
+            <div class="">
+                <button class="btn btn-sm btn-primary btn_exp">Obligatoriske fag </button>
+                <button class="btn btn-sm btn-success btn_exp">Valgfag </button>
+                <button class="btn btn-sm btn-warning btn_exp">Udvidet fagpakke fag</button>
+            </div>
+        </div>
         <div class="col-xs-12 knap_container">
         </div>
+        
         <div id="semester_app" class="row ">
         </div>
         <div class="row"></div>
         <div class="col-xs-12 feedback_container">
+            
             <span class="feedback">Uddannelsestimer: 0</span><span class="timer_ok_glyph ok_glyph glyphicon glyphicon-ok "></span> <span class="fag_status">Obligatoriske fag</span><span class="obl_fag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span> <span class="fag_status">Kreativt fag</span><span class="krea_fag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span><span class="fag_status">Valgfag</span><span class="valgfag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span>
-        </div>
-        <div class="col-xs-12">
-            <h4>Træk fagene herfra til hvert semester: </h4>
-            <div class="">
-                <button class="btn btn-xs btn-primary btn_exp">Obligatoriske fag </button>
-                <button class="btn btn-xs btn-success btn_exp">Valgfag </button>
-                <button class="btn btn-xs btn-warning btn_exp">Udvidet fagpakke </button>
-                
-            </div>
         </div>
         <div class="dragzone col-xs-12">
         </div>
@@ -45,11 +45,10 @@
         <div id="posY "></div>
  -->
         <div class="col-xs-12 videre_container">
-          <div class="download-btn btn btn-info" "=" "><span class="glyphicons glyphicons-download-alt "></span> Hent wordfil uddannelsesplan</div>
-            <div class="send_email btn btn-info " "=" "><span class="glyphicons glyphicons-envelope"></span> Send mail til hf-vejledningen</div>
-            <a href="https://www.kvuc.dk/vejledning/hf-vejledningen/" target=_blank"><div class="kvuc_link btn btn-info " "=" "><span class="glyphicon glyphicon-link "></span> Bestil vejledning</div></a>
+            <div class="download-btn btn btn-info btn-end" "=" "><span class="glyphicons glyphicons-download-alt "></span> Hent  uddannelsesplan.docx</div>
+            <div class="send_email btn btn-info btn-end " "=" "><span class="glyphicons glyphicons-envelope"></span> Send mail til hf-vejledningen</div>
+            <a href="https://www.kvuc.dk/vejledning/hf-vejledningen/" target=_blank "><div class="kvuc_link btn btn-info btn-end " "=" "><span class="glyphicon glyphicon-link "></span> HF-vejledning</div></a>
         </div>
-    
     </div>
     <!-- </div> -->
     <!-- 
@@ -66,7 +65,7 @@
 <script src="../library/js/filesaver.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    getAjaxData("GET", "json/time.json", false, "json ");
+    getAjaxData("GET", "json/time_fill.json", false, "json ");
     one_line_footer();
 
 });

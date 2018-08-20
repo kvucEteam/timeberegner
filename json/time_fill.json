@@ -1,0 +1,488 @@
+{
+    "semesterdimser": [{
+        "header": "Tidligere gennemførte fag (Merit)",
+        "visible": false
+    }, {
+        "header": "Efterår 2018",
+        "visible": true
+    }, {
+        "header": "Forår 2019",
+        "visible": true
+    }, {
+        "header": "Efterår 2019",
+        "visible": true
+    }, {
+        "header": "Forår 2020",
+        "visible": true
+    }, {
+        "header": "Efterår 2020",
+        "visible": false
+    }, {
+        "header": "Forår 2021",
+        "visible": false
+    }, {
+        "header": "Efterår 2021",
+        "visible": false
+    }, {
+        "header": "Forår 2022",
+        "visible": false
+    }, {
+        "header": "Efterår 2022",
+        "visible": false
+    }, {
+        "header": "Forår 2023",
+        "visible": false
+    }, {
+        "header": "Udvidet fagpakke",
+        "visible": false
+    }],
+    "knapper": [{
+            "tekst": "Tilføj semester <span class='custom_glyphs glyphicon glyphicon-plus'></span>",
+            "selectedIndex": 1
+        }, {
+            "tekst": "Fjern semester <span class='custom_glyphs glyphicon glyphicon-minus'></span>"
+        }, {
+            "tekst": "Aktiver udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>"
+        }, {
+            "tekst": "Aktiver tidligere gennemførte fag <span class='custom_glyphs glyphicon glyphicon-floppy-disk'></span>"
+        }, {
+            "tekst": "Automatisk udfyldning <span class='custom_glyphs glyphicon glyphicon-barcode'></span>"
+        }
+
+    ],
+    "fag": [{
+        "text": "Biologi 0-C",
+        "fagtype": "obligatorisk",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5,
+        "placering": 2,
+        "placering_udvidet": 2
+    }, {
+        "text": "Dansk 0-A",
+        "fagtype": "obligatorisk",
+        "helaar": true,
+        "udd_timer": 260,
+        "su_timer": 20,
+        "placering": 5,
+        "placering_2": 6,
+        "placering_udvidet": 5,
+        "placering_udvidet_2": 6
+    }, {
+        "text": "Engelsk 0-B",
+        "fagtype": "obligatorisk",
+        "helaar": true,
+        "udd_timer": 210,
+        "su_timer": 17.5,
+        "placering": 5,
+        "placering_udvidet": 5
+    }, {
+        "text": "Geografi 0-C",
+        "fagtype": "obligatorisk",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5,
+        "placering": 6,
+        "placering_udvidet": 6
+    }, {
+        "text": "Matematik 0-C",
+        "fagtype": "obligatorisk",
+        "helaar": true,
+        "udd_timer": 135,
+        "su_timer": 11.35,
+        "placering": 2,
+        "placering_udvidet": 2
+    }, {
+        "text": "Historie 0-B",
+        "fagtype": "obligatorisk",
+        "helaar": true,
+        "udd_timer": 150,
+        "su_timer": 12.5,
+        "placering": 1,
+        "placering_udvidet": 1
+    }, {
+        "text": "Kemi 0-C",
+        "fagtype": "obligatorisk",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5,
+        "placering": 2,
+        "placering_udvidet": 2
+    }, {
+        "text": "Religion 0-C",
+        "fagtype": "obligatorisk",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5,
+        "placering": 1,
+        "placering_udvidet": 1
+    }, {
+        "text": "Samfundsfag 0-C",
+        "fagtype": "obligatorisk",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5,
+        "placering": 1,
+        "placering_udvidet": 1
+    }, {
+        "text": "SSO",
+        "forklaring": "På andet år skal du skrive en Større skriftlig opgave (SSO) på max. 15 sider. Du har en undervisningsfri uge til at skrive den, men det er selvfølgelig en god idé at gøre dig nogle overvejelser om opgaven i et godt stykke tid inden.<br><a target='_blank' href='https://www.emu.dk/modul/st%C3%B8rre-skriftlige-opgave-sso-hf-kursister-efter-2013-l%C3%A6replan-0'>Læs mere</a>",
+        "fagtype": "obligatorisk",
+        "helaar": false,
+        "udd_timer": 25,
+        "su_timer": 0,
+        "placering": 6,
+        "placering_udvidet": 6
+    }, {
+        "text": "EP",
+        "forklaring": "På HF-enkeltfag skal du udarbejde et eksamensprojekt. Eksamensprojektet skal udarbejdes inden for de sidste seks uger af undervisningen.<br><a href='https://www.emu.dk/modul/eksamensprojektet-p%C3%A5-hf-enkeltfag-kursister-efter-2013-l%C3%A6replan'>Læs mere</a>",
+        "fagtype": "obligatorisk",
+        "helaar": false,
+        "udd_timer": 25,
+        "su_timer": 0,
+        "placering": 6,
+        "placering_udvidet": 6
+    }, {
+        "text": "Billedkunst 0-C",
+        "fagtype": "kreativt valgfag",
+        "valgfag": true,
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5,
+        "placering_udvidet": 4
+    }, {
+        "text": "Billedkunst C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Biologi C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Dans 0-C",
+        "fagtype": "kreativt valgfag",
+        "valgfag": true,
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Dansk 0-C",
+        "fagtype": "valgfag",
+        "valgfag": true,
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Design og arkitektur 0-C",
+        "fagtype": "kreativt valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Dramatik 0-C",
+        "fagtype": "kreativt valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5,
+        "placering": 4
+    }, {
+        "text": "Engelsk 0-C",
+        "fagtype": "valgfag",
+        "valgfag": true,
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Engelsk C-B",
+        "fagtype": "valgfag",
+        "valgfag": true,
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Erhvervsøkonomi 0-C",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Filosofi C",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Filosofi C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Fransk 0-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 200,
+        "su_timer": 17.5
+    }, {
+        "text": "Fransk C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Fysik 0-C",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5,
+        "placering": 3,
+        "placering_udvidet": 3
+    }, {
+        "text": "Fysik C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5,
+        "placering": 4,
+        "placering_udvidet": 4
+    }, {
+        "text": "Fysik 0-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 200,
+        "su_timer": 17.5
+    }, {
+        "text": "Geografi C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Innovation 0-C",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "International Økonomi 0-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Innovation 0-C",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Italiensk B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Italiensk 0-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 200,
+        "su_timer": 17.5
+    }, {
+        "text": "Kemi 0-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 200,
+        "su_timer": 17.5
+        
+    }, {
+        "text": "Kemi C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5,
+        "placering": 3,
+        "placering_udvidet": 3
+    }, {
+        "text": "Kulturforståelse 0-C",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Matematik C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5,
+        "placering": 3,
+        "placering_udvidet": 3
+
+    }, {
+        "text": "Matematik 0-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 200,
+        "su_timer": 17.5
+    }, {
+        "text": "Mediefag 0-C",
+        "fagtype": "kreativt valgfag",
+        "valgfag": true,
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5,
+        "placering": 6
+    }, {
+        "text": "Mediefag C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Musik 0-C",
+        "fagtype": "kreativt valgfag",
+        "valgfag": true,
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5,
+        "placering": 4
+    }, {
+        "text": "Musik C-B",
+        "fagtype": "kreativt valgfag",
+        "valgfag": true,
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5      
+    }, {
+        "text": "Musik 0-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 200,
+        "su_timer": 17.5
+    }, {
+        "text": "Naturgeografi C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Oltidskundskab 0-C",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Psykologi C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Psykologi 0-C",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Religion C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Retorik 0-C",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Samfundsfag C-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Samfundsfag 0-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 200,
+        "su_timer": 17.5
+    }, {
+        "text": "Spansk 0-B",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 200,
+        "su_timer": 17.5
+    }, {
+        "text": "Tysk 0-C",
+        "fagtype": "valgfag",
+        "helaar": false,
+        "udd_timer": 75,
+        "su_timer": 6.5
+    }, {
+        "text": "Biologi B-A",
+        "fagtype": "udvidet",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Engelsk B-A",
+        "fagtype": "udvidet",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5,
+        "placering_udvidet": 6
+    }, {
+        "text": "Fransk B-A",
+        "fagtype": "udvidet",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Fysik B-A",
+        "fagtype": "udvidet",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Historie B-A",
+        "fagtype": "udvidet",
+        "helaar": false,
+        "udd_timer": 50,
+        "su_timer": 10.5
+    }, {
+        "text": "Italiensk B-A",
+        "fagtype": "udvidet",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Kemi B-A",
+        "fagtype": "udvidet",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Matematik B-A",
+        "fagtype": "udvidet",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5,
+        "placering_udvidet": 4
+    }, {
+        "text": "Spansk B-A",
+        "fagtype": "udvidet",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }, {
+        "text": "Tysk B-A",
+        "fagtype": "udvidet",
+        "helaar": false,
+        "udd_timer": 125,
+        "su_timer": 10.5
+    }]
+}
