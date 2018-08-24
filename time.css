@@ -5,20 +5,22 @@
 
 .knap_container {
     margin-bottom: 20px;
+    margin-left: -3px;
 }
 
 .dragzone {
     min-height: 30px;
     margin-top: 10px;
+    margin-left: -4px;
 }
 
 .semester_content {
-    padding: 4px 4px 30px 0px;
+    padding: 4px 4px 30px 0;
     background-color: #ddd;
-    min-height: 60px;
-    margin: 0px -14px -1px 5px;
-    border: 1px solid #999;
-    border-radius: 3px;
+    min-height: 70px;
+    margin: 0 -14px -1px 5px;
+    border: 2px solid #ccc;
+    border-radius: 2px;
 }
 
 .feedback,
@@ -26,13 +28,17 @@
     margin-right: 15px;
     border-radius: 6px;
     padding: 4px;
+    margin-left: 10px;
 }
 
 .su_timer {
     font-size: 11px;
     position: absolute;
-    right: -16px;
-    bottom: 4px;
+    right: 2px;
+    bottom: -3px;
+    border-radius:2PX;
+    padding: 0px 2px 0px 2px;
+    cursor: pointer;
 }
 
 .fag_btn {
@@ -76,8 +82,9 @@
 
 .ok_glyph {
     color: #777;
-    margin-left: -15px;
+    margin-left: -13px;
     opacity: .2;
+    margin-right: 20px;
 }
 
 .complete_ok_glyph {
@@ -97,6 +104,13 @@
     cursor: pointer;
     width: auto;
     margin-top: -10px;
+    background-color: #fff;
+    margin-left: 0px;
+    border: 1px solid #999;
+    padding: 9px 12px 9px 12px;
+    border-radius: 3px;
+    margin-top: -20px;
+    margin-bottom: 22px;
 }
 
 .videre_container {
@@ -130,8 +144,37 @@
     width: 100%;
     z-index: 102;
 }
-.labelcontainer{
-    margin-top: -10px;
-    padding-left: 20px;
-    margin-bottom: 20px;
+
+.labelcontainer {
+    margin-top: 10px;
+    padding-left: 15px;
+    margin-bottom: 0px;
+}
+
+.su-success {
+    color: rgb(0,150,0);
+}
+
+.su-danger {
+    color: rgb(240,80,0);
+    /*! background-color: rgba(255, 0, 0, .4); */
+}
+
+.su_display{
+    /*! color: green; */
+    font-size: 12px;
+}
+
+h1{
+    margin-bottom: 10px;
+
+}
+
+
+#semester_app{
+    margin-left:-5px
+}
+
+.inline_ul{
+    margin-left: -30px;
 }

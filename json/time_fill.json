@@ -42,11 +42,13 @@
         }, {
             "tekst": "Fjern semester <span class='custom_glyphs glyphicon glyphicon-minus'></span>"
         }, {
-            "tekst": "Aktiver udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>"
+            "tekst": "Vis udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>"
         }, {
-            "tekst": "Aktiver tidligere gennemførte fag <span class='custom_glyphs glyphicon glyphicon-floppy-disk'></span>"
+            "tekst": "Skjul tidligere gennemførte fag <span class='custom_glyphs glyphicon glyphicon-floppy-disk'></span>"
         }, {
-            "tekst": "Automatisk udfyldning <span class='custom_glyphs glyphicon glyphicon-barcode'></span>"
+            "tekst": "Vis et eksempel<span class='custom_glyphs glyphicon glyphicon-barcode'></span>"
+        }, {
+            "tekst": "Fjern alt<span class='custom_glyphs glyphicon glyphicon-remove'></span>"
         }
 
     ],
@@ -152,13 +154,13 @@
         "placering_udvidet": 4
     }, {
         "text": "Billedkunst C-B",
-        "fagtype": "valgfag",
+        "fagtype": "kreativt udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
     }, {
         "text": "Biologi C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
@@ -198,7 +200,7 @@
         "su_timer": 6.5
     }, {
         "text": "Engelsk C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "valgfag": true,
         "helaar": false,
         "udd_timer": 125,
@@ -210,14 +212,14 @@
         "udd_timer": 75,
         "su_timer": 6.5
     }, {
-        "text": "Filosofi C",
+        "text": "Filosofi 0-C",
         "fagtype": "valgfag",
         "helaar": false,
         "udd_timer": 75,
         "su_timer": 6.5
     }, {
         "text": "Filosofi C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
@@ -229,7 +231,7 @@
         "su_timer": 17.5
     }, {
         "text": "Fransk C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 75,
         "su_timer": 6.5
@@ -243,7 +245,7 @@
         "placering_udvidet": 3
     }, {
         "text": "Fysik C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5,
@@ -257,7 +259,7 @@
         "su_timer": 17.5
     }, {
         "text": "Geografi C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
@@ -280,7 +282,7 @@
         "udd_timer": 75,
         "su_timer": 6.5
     }, {
-        "text": "Italiensk B",
+        "text": "Italiensk C-B",
         "fagtype": "valgfag",
         "helaar": false,
         "udd_timer": 125,
@@ -300,7 +302,7 @@
         
     }, {
         "text": "Kemi C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5,
@@ -314,7 +316,7 @@
         "su_timer": 6.5
     }, {
         "text": "Matematik C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5,
@@ -337,7 +339,7 @@
         "placering": 6
     }, {
         "text": "Mediefag C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
@@ -351,7 +353,7 @@
         "placering": 4
     }, {
         "text": "Musik C-B",
-        "fagtype": "kreativt valgfag",
+        "fagtype": "kreativt udvidet valgfag",
         "valgfag": true,
         "helaar": false,
         "udd_timer": 125,
@@ -364,19 +366,19 @@
         "su_timer": 17.5
     }, {
         "text": "Naturgeografi C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
     }, {
-        "text": "Oltidskundskab 0-C",
+        "text": "Oldtidskundskab 0-C",
         "fagtype": "valgfag",
         "helaar": false,
         "udd_timer": 75,
         "su_timer": 6.5
     }, {
         "text": "Psykologi C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
@@ -388,7 +390,7 @@
         "su_timer": 6.5
     }, {
         "text": "Religion C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
@@ -400,7 +402,7 @@
         "su_timer": 6.5
     }, {
         "text": "Samfundsfag C-B",
-        "fagtype": "valgfag",
+        "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
@@ -424,26 +426,26 @@
         "su_timer": 6.5
     }, {
         "text": "Biologi B-A",
-        "fagtype": "udvidet",
+        "fagtype": "udvidet ba",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
     }, {
         "text": "Engelsk B-A",
-        "fagtype": "udvidet",
+        "fagtype": "udvidet ba",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5,
         "placering_udvidet": 6
     }, {
         "text": "Fransk B-A",
-        "fagtype": "udvidet",
+        "fagtype": "udvidet ba",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
     }, {
         "text": "Fysik B-A",
-        "fagtype": "udvidet",
+        "fagtype": "udvidet ba",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
@@ -455,32 +457,32 @@
         "su_timer": 10.5
     }, {
         "text": "Italiensk B-A",
-        "fagtype": "udvidet",
+        "fagtype": "udvidet ba",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
     }, {
         "text": "Kemi B-A",
-        "fagtype": "udvidet",
+        "fagtype": "udvidet ba",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
     }, {
         "text": "Matematik B-A",
-        "fagtype": "udvidet",
+        "fagtype": "udvidet ba",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5,
         "placering_udvidet": 4
     }, {
         "text": "Spansk B-A",
-        "fagtype": "udvidet",
+        "fagtype": "udvidet ba",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
     }, {
         "text": "Tysk B-A",
-        "fagtype": "udvidet",
+        "fagtype": "udvidet ba",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5

@@ -16,43 +16,45 @@
 
 <body>
     <div class="container-fluid">
-        <h1>Timeberegning</h1>
-        <div class="col-xs-12">
-            <div class="instr_container"></div>
-            <div id="explanationwrapper"></div>
-        </div>
-        <div class="col-xs-12 labelcontainer">
-            <div class="">
-                <button class="btn btn-sm btn-primary btn_exp">Obligatoriske fag </button>
-                <button class="btn btn-sm btn-success btn_exp">Valgfag </button>
-                <button class="btn btn-sm btn-warning btn_exp">Udvidet fagpakke fag</button>
+        <h1>Din HF Uddannelsesplan</h1>
+        <div class="outer_container">
+            <div class="col-xs-12">
+                <div class="instr_container"></div>
+                <div class="col-xs-12 feedback_container">
+                    <b> Krav til fuld HF: </b>
+                    <span class="fag_status">Alle obligatoriske fag</span><span class="obl_fag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span> <span class="fag_status">1 Kreativt fag</span><span class="krea_fag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span><span class="fag_status">3-5 Valgfag</span><span class="valgfag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span><span class="udvidet_fag_status fag_status">Udvidet fagpakke</span><span class="udvidet_fag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span>
+                    <span class="feedback">Uddannelsestimer: 0</span><span class="timer_ok_glyph ok_glyph glyphicon glyphicon-ok "></span>
+                </div>
+                <div id="explanationwrapper"></div>
             </div>
-        </div>
-        <div class="col-xs-12 knap_container">
-        </div>
-        
-        <div id="semester_app" class="row ">
-        </div>
-        <div class="row"></div>
-        <div class="col-xs-12 feedback_container">
-            
-            <span class="feedback">Uddannelsestimer: 0</span><span class="timer_ok_glyph ok_glyph glyphicon glyphicon-ok "></span> <span class="fag_status">Obligatoriske fag</span><span class="obl_fag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span> <span class="fag_status">Kreativt fag</span><span class="krea_fag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span><span class="fag_status">Valgfag</span><span class="valgfag_ok_glyph ok_glyph glyphicon glyphicon-ok "></span>
-        </div>
-        <div class="dragzone col-xs-12">
-        </div>
-        <!-- 
+            <div class="col-xs-12 knap_container">
+            </div>
+            <div id="semester_app" class="row ">
+            </div>
+            <div class="col-xs-12 labelcontainer">
+                <div class="">
+                    <button class="btn btn-sm btn-primary btn_exp">Obligatoriske fag </button>
+                    <button class="btn btn-sm btn-success btn_exp">Valgfag </button>
+                    <button class="btn btn-sm btn-warning btn_exp">Udvidet fagpakke fag</button>
+                </div>
+            </div>
+            <div class="row"></div>
+            <div class="dragzone col-xs-12">
+            </div>
+            <!-- 
         <div id="posX "></div>
         <div id="posY "></div>
  -->
-        <div class="col-xs-12 videre_container">
-            <div class="download-btn btn btn-info btn-end" "=" "><span class="glyphicons glyphicons-download-alt "></span> Hent  uddannelsesplan.docx</div>
+            <div class="col-xs-12 videre_container">
+                <div class="download-btn btn btn-info btn-end" "=" "><span class="glyphicons glyphicons-download-alt "></span> Hent uddannelsesplan.docx</div>
             <div class="send_email btn btn-info btn-end " "=" "><span class="glyphicons glyphicons-envelope"></span> Send mail til hf-vejledningen</div>
-            <a href="https://www.kvuc.dk/vejledning/hf-vejledningen/" target=_blank "><div class="kvuc_link btn btn-info btn-end " "=" "><span class="glyphicon glyphicon-link "></span> HF-vejledning</div></a>
+                <a href="https://www.kvuc.dk/vejledning/hf-vejledningen/" target=_blank "><div class="kvuc_link btn btn-info btn-end " "=" "><span class="glyphicon glyphicon-link "></span> HF-vejledning</div></a>
+            </div>
+            <div class="saveConsole"></div>
         </div>
-        <div class="saveConsole"></div>
     </div>
-    <!-- </div> -->
-    <!-- 
+        <!-- </div> -->
+        <!-- 
     <div class="console ">
         <div class="koordinatsystem_size "></div>
         <div class="partipos ">
