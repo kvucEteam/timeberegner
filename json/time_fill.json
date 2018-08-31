@@ -458,10 +458,10 @@
         "su_timer": 10.5
     }, {
         "text": "Historie B-A",
-        "fagtype": "udvidet",
+        "fagtype": "udvidet ba",
         "helaar": false,
         "udd_timer": 50,
-        "su_timer": 10.5
+        "su_timer": 4.2
     }, {
         "text": "Italiensk B-A",
         "fagtype": "udvidet ba",

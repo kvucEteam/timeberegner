@@ -1,6 +1,6 @@
 var min_timer = 1705;
 var max_timer = 1755;
-var semestre = 6;
+var semestre = 4;
 
 var valgfag = 0,
     kreative_fag = 0,
@@ -17,7 +17,10 @@ var valgfag = 0,
     d = new Date(),
     valgfagsstimer = 0,
     tipTimer,
-    mouseAction = 3000;
+    mouseAction = 3000,
+    startaar = 2018;
+startsemester = "Efterår";
+
 
 
 $(document).ready(function() {
@@ -78,83 +81,85 @@ $(document).ready(function() {
 
     function init() {
 
-    /* lav knapperne */
+        /* lav knapperne */
 
-    for (var i = 0; i < jsonData.knapper.length; i++) {
-        $(".knap_container").append("<button class='btn btn-sm btn-info btn-var'>" + jsonData.knapper[i].tekst + "</button>");
-    }
+        
 
-    /* lav containere */
-
-
-    for (var i = 0; i < jsonData.semesterdimser.length; i++) {
-        $("#semester_app").append("<div class ='semester_container col-lg-3 col-md-4 col-sm-4 col-xs-6'><div class='semester_content '><div class='semester_title'>" + jsonData.semesterdimser[i].header + "</div> <div class='su_timer'> SU timer: <span class='su_display'>0</span> </div> </div></div>");
-
-        if (i > semestre) {
-            $(".semester_container").eq(i).hide();
-        }
-    }
-
-
-    /*lav fag_draggables */
-
-    for (var i = 0; i < jsonData.fag.length; i++) {
-        //console.log("I: " + i);
-        $(".dragzone").append("<span id ='fag_" + i + "' timestamp ='" + i + "' class='fag_" + i + " btn btn-xs draggable fag_btn'>" + jsonData.fag[i].text + "</span"); //(<span class='num'>" + jsonData.fag[i].udd_timer + "/" + jsonData.fag[i].su_timer + "</span>)</span>");
-        if (jsonData.fag[i].fagtype == "obligatorisk") {
-            $(".fag_btn").eq(i).addClass("obligatorisk btn-primary");
-        } else if (jsonData.fag[i].fagtype == "kreativt valgfag") {
-            $(".fag_btn").eq(i).addClass("btn-success flexible valgfag");
-        } else if (jsonData.fag[i].fagtype == "opgave") {
-            $(".fag_btn").eq(i).addClass("btn-primary opgave");
-        } else if (jsonData.fag[i].fagtype == "valgfag") {
-            $(".fag_btn").eq(i).addClass("valgfag btn-success");
-        } else if (jsonData.fag[i].fagtype == "udvidet") {
-            $(".fag_btn").eq(i).addClass("udvidet btn-warning");
-        } else if (jsonData.fag[i].fagtype == "udvidet ba") {
-            $(".fag_btn").eq(i).addClass("udvidet ba btn-warning");
-        } else if (jsonData.fag[i].fagtype == "udvidet valgfag") {
-            $(".fag_btn").eq(i).addClass("udvidet valgfag btn-success");
-        } else if (jsonData.fag[i].fagtype == "kreativt udvidet valgfag") {
-            $(".fag_btn").eq(i).addClass("udvidet valgfag btn-success");
+        for (var i = 0; i < jsonData.knapper.length; i++) {
+            $(".knap_container").append("<button class='btn btn-sm btn-info btn-var'>" + jsonData.knapper[i].tekst + "</button>");
         }
 
-        if (jsonData.fag[i].helaar == true) {
-            $(".fag_btn").eq(i).addClass("helaar");
+        /* lav containere */
+
+$("#semester_app").append("<div class ='semester_container col-lg-3 col-md-4 col-sm-4 col-xs-6'><div class='semester_content '><div class='semester_title'>Tidligere gennemførte fag (Merit)</div><div class='su_timer'> SU timer: <span class='su_display'>0</span> </div>  </div></div>");
+        
+        for (var i = 0; i < 20; i++) {
+
+            if (i % 2) {
+                startsemester = "Forår";
+startaar ++;
+            } else {
+                startsemester = "Efterår";
+                
+            }
+            
+            $("#semester_app").append("<div class ='semester_container col-lg-3 col-md-4 col-sm-4 col-xs-6'><div class='semester_content '><div class='semester_title'>" + startsemester + " " + startaar + "</div> <div class='su_timer'> SU timer: <span class='su_display'>0</span> </div> </div></div>");
+
+
+            if (i > semestre) {
+                $(".semester_container").eq(i).hide();
+            }
         }
 
 
+        /*lav fag_draggables */
+
+        for (var i = 0; i < jsonData.fag.length; i++) {
+            //console.log("I: " + i);
+            $(".dragzone").append("<span id ='fag_" + i + "' timestamp ='" + i + "' class='fag_" + i + " btn btn-xs draggable fag_btn'>" + jsonData.fag[i].text + "</span"); //(<span class='num'>" + jsonData.fag[i].udd_timer + "/" + jsonData.fag[i].su_timer + "</span>)</span>");
+            if (jsonData.fag[i].fagtype == "obligatorisk") {
+                $(".fag_btn").eq(i).addClass("obligatorisk btn-primary");
+            } else if (jsonData.fag[i].fagtype == "kreativt valgfag") {
+                $(".fag_btn").eq(i).addClass("btn-success flexible valgfag");
+            } else if (jsonData.fag[i].fagtype == "opgave") {
+                $(".fag_btn").eq(i).addClass("btn-primary opgave");
+            } else if (jsonData.fag[i].fagtype == "valgfag") {
+                $(".fag_btn").eq(i).addClass("valgfag btn-success");
+            } else if (jsonData.fag[i].fagtype == "udvidet") {
+                $(".fag_btn").eq(i).addClass("udvidet btn-warning");
+            } else if (jsonData.fag[i].fagtype == "udvidet ba") {
+                $(".fag_btn").eq(i).addClass("udvidet ba btn-warning");
+            } else if (jsonData.fag[i].fagtype == "udvidet valgfag") {
+                $(".fag_btn").eq(i).addClass("udvidet valgfag btn-success");
+            } else if (jsonData.fag[i].fagtype == "kreativt udvidet valgfag") {
+                $(".fag_btn").eq(i).addClass("udvidet valgfag btn-success");
+            }
+
+            if (jsonData.fag[i].helaar == true) {
+                $(".fag_btn").eq(i).addClass("helaar");
+            }
+
+
+        }
+
+        $(".semester_container").eq(0).removeClass("col-lg-3 col-md-4 col-sm-4 col-xs-6").addClass("col-lg-6 col-md-8 col-sm-8 col-xs-12");
+
+        $(".su_timer").eq(0).hide();
+        $(".semester_container").eq(0).hide();
     }
-    //$(".obligatorisk").eq(0).before("Obligatoriske fag<br/>");
-    //$(".flexible").eq(0).before("<br/>");
-
-    //$(".udvidet").eq(0).before("<br/>");
-
-    //Placer SSO i sidste container:
-
-    //$("#fag_43").appendTo($(".semester_content").eq(4)); // SSO autoplacering nu udkommenteret
-    //udregn_timer();
-    //make_overlay();
-    $(".semester_container").eq(0).removeClass("col-lg-3 col-md-4 col-sm-4 col-xs-6").addClass("col-lg-6 col-md-8 col-sm-8 col-xs-12");
-
-    $(".su_timer").eq(0).hide();
-    $(".semester_container").eq(0).hide();
-}
 
 
     /*==================================
     =            Droppable afdeling            =
     ==================================*/
-    
-    
+
+
 
     $(".semester_content, .dragzone").droppable({
 
         accept: ".fag_btn",
         tolerance: "touch",
         drop: function(e, ui) {
-
-            //alert($(this).html());
 
 
             if ($(this).hasClass("semester_content")) {
@@ -165,14 +170,13 @@ $(document).ready(function() {
                 var id_length = $("." + this_id).length;
 
 
+                /*----------  Hvis SU er for højt i kasserne  ----------*/
+
                 var this_sutimer = parseInt($(this).find(".su_display").html());
 
                 if (this_sutimer > 35 && $(this).index(".semester_content") != 0) {
                     microhint($(this), "Du har allerede " + this_sutimer + " SU timer i dette semester. Placer faget i et andet semester.");
 
-                    //ui.draggable.hide();
-                    //$(this).append(ui.draggable);
-                    //$(".dragzone").prepend(ui.draggable);
                     ui.draggable.animate({
                         left: 0,
                         top: 0
@@ -186,11 +190,8 @@ $(document).ready(function() {
                         });
                     });
 
-
-
-                    //animatecss("top", "0px").css("left", "0px");
                     sortDivs();
-                    //setTimeout(function() { sortDivs(); }, 5);
+
                 } else {
                     ui.draggable.addClass("dropped")
                     $(this).append(ui.draggable);
@@ -199,32 +200,16 @@ $(document).ready(function() {
                         top: 0,
                         left: 0,
                         margin: "4px",
-                        //width: $(this).width() + "px"
                     });
 
                     if (id_length < 2) {
 
                         if (ui.draggable.hasClass("helaar")) {
 
-                            var place = ui.draggable.attr("id");
-                            place = place.substring(4, place.length);
-                            place = Number(place);
-                            console.log("type: " + typeof(place));
-
-                            var placering = $("#fag_" + (place + 1));
-
-                            // alert(placering);
-                            //placering.css("background-color", "red")
-
-
-
                             console.log("FG BTN: " + ui.draggable.index(".fag_btn"));
-
-
 
                             microhint(ui.draggable, ui.draggable.html() + " kan tages både halv og helårligt. Træk det samme fag til et andet semester for at tage det over et helt år.")
                                 //ui.draggable.append("<div class='helaarlabel'>Helårligt</div>")
-
 
 
                             var klon = ui.draggable.clone().prependTo(".dragzone").addClass("clone"); //insertBefore("#fag_1");//prependTo(".dragzone");
@@ -238,9 +223,6 @@ $(document).ready(function() {
                                     $(".microhint").remove();
                                 }
                             });
-
-
-
                         }
 
                     } else if (id_length > 1) {
@@ -351,7 +333,7 @@ $(document).ready(function() {
 
 
     $(".btn_exp").eq(2).hide();
-    $(".udvidet_fag_status, .udvidet_fag_ok_glyph, .ba, #fag_58").hide();
+    $(".udvidet_fag_status, .udvidet_fag_ok_glyph, .ba").hide();
 
 
     $("#fag_9, #fag_10").css("background-color", "rgb(135, 150, 220");
@@ -366,9 +348,9 @@ $(document).ready(function() {
 
 });
 
-    
-    
-    /*=====  End of Droppable   ======*/
+
+
+/*=====  End of Droppable   ======*/
 
 
 
@@ -680,13 +662,13 @@ function nav_click(text, object) {
     }
 
     if (indeks == 0) {
-        if (semestre < 10) {
+        if (semestre < 19) {
             semestre++;
             $(".semester_container").eq(semestre).fadeIn();
         } else {
-            microhint($(".knap_container"), "Du kan maksimalt arbejde med 10 semestre");
+            microhint($(".knap_container"), "Du kan maksimalt arbejde med 18 semestre");
         }
-        $(".semester_title").eq(11).html(jsonData.semesterdimser[semestre + 1].header + " (udvidet fagpakke)");
+        
         udregn_timer();
     }
     if (indeks == 1) {
@@ -698,7 +680,7 @@ function nav_click(text, object) {
         } else {
             microhint($(".knap_container"), "Du skal have minimum 1 semester");
         }
-        $(".semester_title").eq(11).html(jsonData.semesterdimser[semestre + 1].header + " (udvidet fagpakke)");
+        
         udregn_timer();
     }
 
@@ -708,8 +690,8 @@ function nav_click(text, object) {
 
             object.html("Vis udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
             $(".btn_exp").eq(2).fadeOut();
-            $(".udvidet_fag_status, .udvidet_fag_ok_glyph, .ba, #fag_58").fadeOut();
-            $(".ba, #fag_58").appendTo(".dragzone");
+            $(".udvidet_fag_status, .udvidet_fag_ok_glyph, .ba").fadeOut();
+            $(".ba").appendTo(".dragzone");
             sortDivs();
 
             min_timer = 1705;
@@ -722,7 +704,7 @@ function nav_click(text, object) {
             udvidet_fagpakke = true;
             object.html("Skjul udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
             $(".btn_exp").eq(2).fadeIn();
-            $(".udvidet_fag_status, .udvidet_fag_ok_glyph, .ba, #fag_58").fadeIn();
+            $(".udvidet_fag_status, .udvidet_fag_ok_glyph, .ba").fadeIn();
             min_timer = 1905;
             max_timer = 1955;
         }
@@ -734,7 +716,7 @@ function nav_click(text, object) {
 
 
 
-        UserMsgBox_xclick("body", "Vil du fylde semestrene ud automatisk?<br/><button class='btn_accept_udfyld btn-sm btn btn-success'>Ja - med almindelig HF</button><button class='btn_accept_udfyld_udvidet btn-sm btn btn-success'>Ja - med den udvidede fagpakke</button><p>Klik på krydset for at gå tilbage</p>");
+        UserMsgBox_xclick("body", "Vil du fylde semestrene ud automatisk?<br/><button class='btn_accept_udfyld btn-sm btn btn-success'>Ja - med grundpakken</button><button class='btn_accept_udfyld_udvidet btn-sm btn btn-success'>Ja - med den udvidede fagpakke</button><p>Klik på krydset for at gå tilbage</p>");
 
         $(".btn_accept_udfyld").click(function() {
             //object.html("Fjern alle fag <span class='custom_glyphs glyphicon glyphicon-remove'></span>");
@@ -811,11 +793,11 @@ function clicked_SU(object) {
     //alert (typeof(SU_timer) + ": " + SU_timer);
     if (SU_timer_Int < 23) {
 
-        microhint(object, SU_timer + " SU-timer er ikke nok til at du kan få SU i " + $(".semester_title").eq(parentID).html() + ". <br/>Du skal have minimum 23 SU-timer om ugen for at være berettiget til SU.");
-    } else if (SU_timer_Int > 30.9) {
-        microhint(object, "Du har ret til SU i "+ $(".semester_title").eq(parentID).html() +", men " + SU_timer + " SU-timer er for mange timer i forhold til hvad vi anbefaler om ugen. Prøv at flytte et fag til et andet semester.");
+        microhint(object, SU_timer + " SU-timer er ikke nok til at du kan få SU i " + $(".semester_title").eq(parentID).html() + ". <br/>Du skal have minimum 23 SU-timer om ugen for at være berettiget til SU. <br/>(Du kan nøjes med 17 timer, hvis du har et hjemmeboende barn under syv år.");
+    } else if (SU_timer_Int > 30) {
+        microhint(object, "Du har ret til SU i " + $(".semester_title").eq(parentID).html() + ", men " + SU_timer + " SU-timer er for mange timer i forhold til hvad vi anbefaler om ugen. Prøv at flytte et fag til et andet semester.");
     } else {
-        microhint(object, SU_timer + " SU-timer gør, at du er berettiget til SU i "+ $(".semester_title").eq(parentID).html() +" og er et fornuftigt antal timer på en uge.");
+        microhint(object, SU_timer + " SU-timer gør, at du er berettiget til SU i " + $(".semester_title").eq(parentID).html() + " og er et fornuftigt antal timer på en uge.");
     }
 }
 
@@ -837,7 +819,7 @@ function clicked_feedback(object) {
 
     var HTML = "";
 
-    HTML += " <ul class='inline_ul'><li> En fuld HF består af 1705  uddannelsestimer</li><li>En udvidet HF består af 1905 timer og giver adgang til universitetet.</li><li> Du skal som minimum have 23 SU-timer i hvert semester, for at modtage SU-støtte. Vi anbefaler ikke, at du har mere end 30 SU-timer pr. semester. </li><li> Du skal have en bestemt fordeling af fag. Læs mere ved at trykke på:</li> </ul><button class='btn btn-sm btn-primary btn_exp'>Obligatoriske fag </button>    <button class='btn btn-sm btn-success btn_exp'>Valgfag </button>";
+    HTML += " <ul class='inline_ul'><li> En fuld HF består af 1705  uddannelsestimer</li><li>En udvidet HF består af 1905 timer og giver adgang til universitetet.</li><li> Du skal som minimum have 23 SU-timer i hvert semester, for at modtage SU-støtte. (17 timer, hvis du har et hjemmeboende barn under syv år.) <br/>Vi anbefaler ikke, at du har mere end 30 SU-timer pr. semester. </li><li> Du skal have en bestemt fordeling af fag. Læs mere ved at trykke på:</li> </ul><button class='btn btn-sm btn-primary btn_exp'>Obligatoriske fag </button>    <button class='btn btn-sm btn-success btn_exp'>Valgfag </button>";
 
     microhint(object, HTML)
 
@@ -920,7 +902,7 @@ function send_email() {
                 HTML += $(this).html() + "%0D%0A";
             });
 
-            HTML += $(".su_timer").eq(index).html() + "%0D%0A%0D%0A";
+            HTML += "SU timer dette semester: " + $(".su_display").eq(index).html() + "%0D%0A%0D%0A";
         }
 
     });
@@ -957,7 +939,7 @@ function autoudfyld(udfyld_type) {
         udvidet_fagpakke = false;
         //object.html("Deaktiver udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
         $(".btn_exp").eq(2).fadeOut();
-        $(".ba, #fag_58, .udvidet_fag_status, .udvidet_fag_ok_glyph").fadeOut();
+        $(".ba,  .udvidet_fag_status, .udvidet_fag_ok_glyph").fadeOut();
         $(".btn-var").eq(2).html("Vis udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
         min_timer = 1705;
         max_timer = 1755;
@@ -990,14 +972,14 @@ function autoudfyld(udfyld_type) {
         //object.html("Deaktiver udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
         $(".btn_exp").eq(2).fadeIn();
 
-        $(".ba, #fag_58, .udvidet_fag_status, .udvidet_fag_ok_glyph").fadeIn();
+        $(".ba,  .udvidet_fag_status, .udvidet_fag_ok_glyph").fadeIn();
         $(".btn-var").eq(2).html("Skjul udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
         semestre = 6;
         min_timer = 1905;
         max_timer = 1955;
 
 
-        $(".ba, #fag_58").fadeIn();
+        $(".ba").fadeIn();
 
         for (var i = 0; i < jsonData.fag.length; i++) {
             if (jsonData.fag[i].placering_udvidet) {
@@ -1174,7 +1156,7 @@ function loadData() {
         if (udvidet_fagpakke == true) {
             $(".btn-var").eq(2).html("Skjul udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
             $(".btn_exp").eq(2).fadeIn(0);
-            $(".ba, #fag_58, .udvidet_fag_status, .udvidet_fag_ok_glyph").fadeIn(0);
+            $(".ba,  .udvidet_fag_status, .udvidet_fag_ok_glyph").fadeIn(0);
             min_timer = 1905;
             max_timer = 1955;
         }
@@ -1189,7 +1171,11 @@ function loadData() {
             console.log("i:" + (i - 1));
             for (var o = 0; o < TjsonData[i].length; o++) {
 
-                $(".semester_content").eq(i - 1).append($("#" + TjsonData[i][o]));
+                var fag = $("#" + TjsonData[i][o]);
+                $(".semester_content").eq(i - 1).append(fag);
+
+                fag.addClass("dropped");
+
                 console.log("TjsonfData: " + (i - 1) + ": " + TjsonData[i][o]);
 
             }
@@ -1342,9 +1328,15 @@ function help() {
 
 
     } else if (!$(".timer_ok_glyph").hasClass("complete_ok_glyph")) {
-
-        microhint($(".btn-var").eq(6), "Du har for mange timer, skift f.eks. et valgfag ud med et der har færre timer eller skift et B-A fag ud med et C-B fag."); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
-
+        if (totalTimer > max_timer) {
+            microhint($(".btn-var").eq(6), "Du har for mange timer, skift f.eks. et valgfag ud med et der har færre timer eller skift et B-A fag ud med et C-B fag."); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
+        } else {
+            if ($("#fag_58").hasClass("dropped")) {
+                microhint($(".btn-var").eq(6), "Du har valgt ikke timer nok til en fuld HF. <br/>Bemærk at Historie B-A tæller 75 timer mindre end de andre B-A fag.<br/> <br/> Vælg et andet B-A fag eller tilføj endnu et fag"); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());     
+            } else {
+                microhint($(".btn-var").eq(6), "Du har ikke timer nok til en fuld HF. <br/> Tilføj et fag mere."); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
+            }
+        }
     } else {
 
         microhint($(".glyphicon-question-sign"), "Du har sammensat en fuld HF <br/> Hent din uddannelsesplan, send en mail til vejledningen eller tag et screenshot af siden.");
