@@ -60,7 +60,7 @@
         "helaar": false,
         "udd_timer": 75,
         "su_timer": 6.5,
-        "placering": 2,
+        "placering": 5,
         "placering_udvidet": 2
     }, {
         "text": "Dansk 0-A",
@@ -68,8 +68,8 @@
         "helaar": true,
         "udd_timer": 260,
         "su_timer": 20,
-        "placering": 5,
-        "placering_2": 6,
+        "placering": 4,
+        "placering_2": 5,
         "placering_udvidet": 5,
         "placering_udvidet_2": 6
     }, {
@@ -78,7 +78,8 @@
         "helaar": true,
         "udd_timer": 210,
         "su_timer": 17.5,
-        "placering": 5,
+        "placering": 3,
+        "placering_2": 4,
         "placering_udvidet": 5
     }, {
         "text": "Geografi 0-C",
@@ -86,7 +87,7 @@
         "helaar": false,
         "udd_timer": 75,
         "su_timer": 6.5,
-        "placering": 6,
+        "placering": 3,
         "placering_udvidet": 6
     }, {
         "text": "Matematik 0-C",
@@ -94,7 +95,8 @@
         "helaar": true,
         "udd_timer": 135,
         "su_timer": 11.35,
-        "placering": 2,
+        "placering": 1,
+        "placering_2": 2,
         "placering_udvidet": 2
     }, {
         "text": "Historie 0-B",
@@ -102,7 +104,7 @@
         "helaar": true,
         "udd_timer": 150,
         "su_timer": 12.5,
-        "placering": 1,
+        "placering": 2,
         "placering_udvidet": 1
     }, {
         "text": "Kemi 0-C",
@@ -110,7 +112,7 @@
         "helaar": false,
         "udd_timer": 75,
         "su_timer": 6.5,
-        "placering": 2,
+        "placering": 5,
         "placering_udvidet": 2
     }, {
         "text": "Religion 0-C",
@@ -135,7 +137,7 @@
         "helaar": false,
         "udd_timer": 25,
         "su_timer": 0,
-        "placering": 6,
+        "placering": 4,
         "placering_udvidet": 6
     }, {
         "text": "EP",
@@ -144,7 +146,7 @@
         "helaar": false,
         "udd_timer": 25,
         "su_timer": 0,
-        "placering": 6,
+        "placering": 5,
         "placering_udvidet": 6
     }, {
         "text": "Billedkunst 0-C",
@@ -165,6 +167,8 @@
         "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
+
+        
         "su_timer": 10.5
     }, {
         "text": "Dans 0-C",
@@ -191,8 +195,7 @@
         "fagtype": "kreativt valgfag",
         "helaar": false,
         "udd_timer": 75,
-        "su_timer": 6.5,
-        "placering": 4
+        "su_timer": 6.5
     }, {
         "text": "Engelsk 0-C",
         "fagtype": "valgfag",
@@ -243,7 +246,6 @@
         "helaar": false,
         "udd_timer": 75,
         "su_timer": 6.5,
-        "placering": 3,
         "placering_udvidet": 3
     }, {
         "text": "Fysik C-B",
@@ -251,7 +253,7 @@
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5,
-        "placering": 4,
+        
         "placering_udvidet": 4
     }, {
         "text": "Fysik 0-B",
@@ -308,7 +310,6 @@
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5,
-        "placering": 3,
         "placering_udvidet": 3
     }, {
         "text": "Kulturforståelse 0-C",
@@ -322,7 +323,7 @@
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5,
-        "placering": 3,
+        "placering": 4,
         "placering_udvidet": 3
 
     }, {
@@ -338,21 +339,22 @@
         "helaar": false,
         "udd_timer": 75,
         "su_timer": 6.5,
-        "placering": 6
+        "placering": 1
     }, {
         "text": "Mediefag C-B",
         "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
-        "su_timer": 10.5
+        "su_timer": 10.5,
+        "placering": 3
     }, {
         "text": "Musik 0-C",
         "fagtype": "kreativt valgfag",
         "valgfag": true,
         "helaar": false,
         "udd_timer": 75,
-        "su_timer": 6.5,
-        "placering": 4
+        "su_timer": 6.5
+        
     }, {
         "text": "Musik C-B",
         "fagtype": "udvidet valgfag",
@@ -389,13 +391,15 @@
         "fagtype": "valgfag",
         "helaar": false,
         "udd_timer": 75,
-        "su_timer": 6.5
+        "su_timer": 6.5,
+        "placering": 5
     }, {
         "text": "Religion C-B",
         "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
         "su_timer": 10.5
+
     }, {
         "text": "Retorik 0-C",
         "fagtype": "valgfag",
@@ -407,7 +411,8 @@
         "fagtype": "udvidet valgfag",
         "helaar": false,
         "udd_timer": 125,
-        "su_timer": 10.5
+        "su_timer": 10.5,
+        "placering": 2
     }, {
         "text": "Samfundsfag 0-B",
         "fagtype": "valgfag",

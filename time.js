@@ -7,18 +7,27 @@ var valgfag = 0,
     obligatoriske_fag = 0,
     sso = true,
     ep = false,
-    ba_fag = false;
-opgave = 0;
-totalTimer = 0,
+    ba_fag = false,
+    opgave = 0,
+    totalTimer = 0,
     autoudfyldt = false,
     udvidede_fag = false,
     udvidet_fagpakke = false,
     merit = false,
     d = new Date(),
-    valgfagsstimer = 0;
+    valgfagsstimer = 0,
+    tipTimer,
+    mouseAction = 3000;
 
 
 $(document).ready(function() {
+
+    $(document).on("click touchend mousemove", function() {
+        console.log("Clear timer");
+        window.clearTimeout(tipTimer);
+
+        tipTimer = setTimeout(function() { help(); }, 30000);
+    })
 
 
     $(".saveConsole").hide();
@@ -67,6 +76,78 @@ $(document).ready(function() {
 
     /*=====  End of Event listening  ======*/
 
+    function init() {
+
+    /* lav knapperne */
+
+    for (var i = 0; i < jsonData.knapper.length; i++) {
+        $(".knap_container").append("<button class='btn btn-sm btn-info btn-var'>" + jsonData.knapper[i].tekst + "</button>");
+    }
+
+    /* lav containere */
+
+
+    for (var i = 0; i < jsonData.semesterdimser.length; i++) {
+        $("#semester_app").append("<div class ='semester_container col-lg-3 col-md-4 col-sm-4 col-xs-6'><div class='semester_content '><div class='semester_title'>" + jsonData.semesterdimser[i].header + "</div> <div class='su_timer'> SU timer: <span class='su_display'>0</span> </div> </div></div>");
+
+        if (i > semestre) {
+            $(".semester_container").eq(i).hide();
+        }
+    }
+
+
+    /*lav fag_draggables */
+
+    for (var i = 0; i < jsonData.fag.length; i++) {
+        //console.log("I: " + i);
+        $(".dragzone").append("<span id ='fag_" + i + "' timestamp ='" + i + "' class='fag_" + i + " btn btn-xs draggable fag_btn'>" + jsonData.fag[i].text + "</span"); //(<span class='num'>" + jsonData.fag[i].udd_timer + "/" + jsonData.fag[i].su_timer + "</span>)</span>");
+        if (jsonData.fag[i].fagtype == "obligatorisk") {
+            $(".fag_btn").eq(i).addClass("obligatorisk btn-primary");
+        } else if (jsonData.fag[i].fagtype == "kreativt valgfag") {
+            $(".fag_btn").eq(i).addClass("btn-success flexible valgfag");
+        } else if (jsonData.fag[i].fagtype == "opgave") {
+            $(".fag_btn").eq(i).addClass("btn-primary opgave");
+        } else if (jsonData.fag[i].fagtype == "valgfag") {
+            $(".fag_btn").eq(i).addClass("valgfag btn-success");
+        } else if (jsonData.fag[i].fagtype == "udvidet") {
+            $(".fag_btn").eq(i).addClass("udvidet btn-warning");
+        } else if (jsonData.fag[i].fagtype == "udvidet ba") {
+            $(".fag_btn").eq(i).addClass("udvidet ba btn-warning");
+        } else if (jsonData.fag[i].fagtype == "udvidet valgfag") {
+            $(".fag_btn").eq(i).addClass("udvidet valgfag btn-success");
+        } else if (jsonData.fag[i].fagtype == "kreativt udvidet valgfag") {
+            $(".fag_btn").eq(i).addClass("udvidet valgfag btn-success");
+        }
+
+        if (jsonData.fag[i].helaar == true) {
+            $(".fag_btn").eq(i).addClass("helaar");
+        }
+
+
+    }
+    //$(".obligatorisk").eq(0).before("Obligatoriske fag<br/>");
+    //$(".flexible").eq(0).before("<br/>");
+
+    //$(".udvidet").eq(0).before("<br/>");
+
+    //Placer SSO i sidste container:
+
+    //$("#fag_43").appendTo($(".semester_content").eq(4)); // SSO autoplacering nu udkommenteret
+    //udregn_timer();
+    //make_overlay();
+    $(".semester_container").eq(0).removeClass("col-lg-3 col-md-4 col-sm-4 col-xs-6").addClass("col-lg-6 col-md-8 col-sm-8 col-xs-12");
+
+    $(".su_timer").eq(0).hide();
+    $(".semester_container").eq(0).hide();
+}
+
+
+    /*==================================
+    =            Droppable afdeling            =
+    ==================================*/
+    
+    
+
     $(".semester_content, .dragzone").droppable({
 
         accept: ".fag_btn",
@@ -86,7 +167,7 @@ $(document).ready(function() {
 
                 var this_sutimer = parseInt($(this).find(".su_display").html());
 
-                if (this_sutimer > 40 && $(this).index(".semester_content") != 0) {
+                if (this_sutimer > 35 && $(this).index(".semester_content") != 0) {
                     microhint($(this), "Du har allerede " + this_sutimer + " SU timer i dette semester. Placer faget i et andet semester.");
 
                     //ui.draggable.hide();
@@ -285,78 +366,11 @@ $(document).ready(function() {
 
 });
 
-
-function init() {
-
-    /* lav knapperne */
-
-    for (var i = 0; i < jsonData.knapper.length; i++) {
-        $(".knap_container").append("<button class='btn btn-sm btn-info btn-var'>" + jsonData.knapper[i].tekst + "</button>");
-    }
-
-    /* lav containere */
+    
+    
+    /*=====  End of Droppable   ======*/
 
 
-
-    for (var i = 0; i < jsonData.semesterdimser.length; i++) {
-        $("#semester_app").append("<div class ='semester_container col-lg-3 col-md-4 col-sm-4 col-xs-6'><div class='semester_content '><div class='semester_title'>" + jsonData.semesterdimser[i].header + "</div> <div class='su_timer'> SU timer: <span class='su_display'>0</span> </div> </div></div>");
-
-        if (i > semestre) {
-            $(".semester_container").eq(i).hide();
-        }
-    }
-
-
-
-    //$(".semester_container").eq(0).hide();
-
-
-    /*lav fag_draggables */
-
-    for (var i = 0; i < jsonData.fag.length; i++) {
-        //console.log("I: " + i);
-        $(".dragzone").append("<span id ='fag_" + i + "' timestamp ='" + i + "' class='fag_" + i + " btn btn-xs draggable fag_btn'>" + jsonData.fag[i].text + "</span"); //(<span class='num'>" + jsonData.fag[i].udd_timer + "/" + jsonData.fag[i].su_timer + "</span>)</span>");
-        if (jsonData.fag[i].fagtype == "obligatorisk") {
-            $(".fag_btn").eq(i).addClass("obligatorisk btn-primary");
-        } else if (jsonData.fag[i].fagtype == "kreativt valgfag") {
-            $(".fag_btn").eq(i).addClass("btn-success flexible valgfag");
-        } else if (jsonData.fag[i].fagtype == "opgave") {
-            $(".fag_btn").eq(i).addClass("btn-primary opgave");
-        } else if (jsonData.fag[i].fagtype == "valgfag") {
-            $(".fag_btn").eq(i).addClass("valgfag btn-success");
-        } else if (jsonData.fag[i].fagtype == "udvidet") {
-            $(".fag_btn").eq(i).addClass("udvidet btn-warning");
-        } else if (jsonData.fag[i].fagtype == "udvidet ba") {
-            $(".fag_btn").eq(i).addClass("udvidet ba btn-warning");
-        } else if (jsonData.fag[i].fagtype == "udvidet valgfag") {
-            $(".fag_btn").eq(i).addClass("udvidet valgfag btn-success");
-        } else if (jsonData.fag[i].fagtype == "kreativt udvidet valgfag") {
-            $(".fag_btn").eq(i).addClass("udvidet valgfag btn-success");
-        }
-
-        if (jsonData.fag[i].helaar == true) {
-            //alert("jsonData.fag[i].helaar : " +i +  jsonData.fag[i].helaar);
-
-            $(".fag_btn").eq(i).addClass("helaar");
-        }
-
-
-    }
-    //$(".obligatorisk").eq(0).before("Obligatoriske fag<br/>");
-    //$(".flexible").eq(0).before("<br/>");
-
-    //$(".udvidet").eq(0).before("<br/>");
-
-    //Placer SSO i sidste container:
-
-    //$("#fag_43").appendTo($(".semester_content").eq(4)); // SSO autoplacering nu udkommenteret
-    //udregn_timer();
-    //make_overlay();
-    $(".semester_container").eq(0).removeClass("col-lg-3 col-md-4 col-sm-4 col-xs-6").addClass("col-lg-6 col-md-8 col-sm-8 col-xs-12");
-
-    $(".su_timer").eq(0).hide();
-    $(".semester_container").eq(0).hide();
-}
 
 function make_overlay() {
 
@@ -525,6 +539,7 @@ function udregn_timer() {
 
     if ($(".semester_content > .obligatorisk").length - duplicate_fag_Array.length > 8) {
         $(".obl_fag_ok_glyph").addClass("complete_ok_glyph");
+        //animate_glyph($(".obl_fag_ok_glyph")); 
     } else {
         $(".obl_fag_ok_glyph").removeClass("complete_ok_glyph");
     }
@@ -587,6 +602,10 @@ function udregn_timer() {
 
 
 
+}
+
+function animate_glyph(object) {
+    object.fadeOut(0).fadeIn(200);
 }
 
 function set_height_containers() {
@@ -794,9 +813,9 @@ function clicked_SU(object) {
 
         microhint(object, SU_timer + " SU-timer er ikke nok til at du kan få SU i " + $(".semester_title").eq(parentID).html() + ". <br/>Du skal have minimum 23 SU-timer om ugen for at være berettiget til SU.");
     } else if (SU_timer_Int > 30.9) {
-        microhint(object, SU_timer + " SU-timer er for mange timer i forhold til hvad vi anbefaler om ugen. Prøv at flytte et fag til et andet semester.");
+        microhint(object, "Du har ret til SU i "+ $(".semester_title").eq(parentID).html() +", men " + SU_timer + " SU-timer er for mange timer i forhold til hvad vi anbefaler om ugen. Prøv at flytte et fag til et andet semester.");
     } else {
-        microhint(object, SU_timer + " SU-timer er et passende antal timer på en uge.");
+        microhint(object, SU_timer + " SU-timer gør, at du er berettiget til SU i "+ $(".semester_title").eq(parentID).html() +" og er et fornuftigt antal timer på en uge.");
     }
 }
 
@@ -924,12 +943,16 @@ function autoudfyld(udfyld_type) {
 
     $(".fag_btn").appendTo(".dragzone");
 
+    $(".clone").remove();
+
+
+
 
 
     $(".semester_container").eq(0).hide();
 
     if (udfyld_type == "alm") {
-        semestre = 6;
+        semestre = 5;
         //alert ("SÅ er der Pølle!");
         udvidet_fagpakke = false;
         //object.html("Deaktiver udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
@@ -952,9 +975,12 @@ function autoudfyld(udfyld_type) {
 
                 if (jsonData.fag[i].helaar == true) {
                     console.log(jsonData.fag[i].text + " skal autoplaceres i " + jsonData.fag[i].placering);
-                    var klon = $("#fag_" + i).clone(); //.prependTo(".dragzone");
+                    var klon = $("#fag_" + i).clone().prependTo(".dragzone");
                     klon.addClass("clone");
-                    $(".semester_content").eq(jsonData.fag[i].placering_2).append(klon);
+
+                    if (jsonData.fag[i].placering_2) {
+                        $(".semester_content").eq(jsonData.fag[i].placering_2).append(klon);
+                    }
                 }
             }
         }
@@ -982,9 +1008,13 @@ function autoudfyld(udfyld_type) {
                 $("#fag_" + i).fadeIn(200 + Math.random() * 600);
                 if (jsonData.fag[i].helaar == true) {
                     console.log(jsonData.fag[i].text + " skal autoplaceres i " + jsonData.fag[i].placering_udvidet);
-                    var klon = $("#fag_" + i).clone(); //.prependTo(".dragzone");
+                    var klon = $("#fag_" + i).clone().prependTo(".dragzone");
                     klon.addClass("clone");
-                    $(".semester_content").eq(jsonData.fag[i].placering_udvidet_2).append(klon);
+
+                    if (jsonData.fag[i].placering_udvidet_2) {
+                        $(".semester_content").eq(jsonData.fag[i].placering_udvidet_2).append(klon);
+                    }
+
                 }
             }
         }
@@ -993,7 +1023,7 @@ function autoudfyld(udfyld_type) {
 
 
     $(".semester_container").each(function(index) {
-        if (index > semestre + 1 ||  index == 0) {
+        if (index > semestre ||  index == 0) {
             $(this).fadeOut();
         } else if (index < semestre + 1) {
             $(this).fadeIn();
@@ -1212,7 +1242,7 @@ function help() {
             if (!$(this).hasClass("clone")) {
                 var indeks = $(this).index(".obligatorisk");
 
-                microhint($(".obligatorisk").eq(indeks), "Du mangler at placere " + $(".obligatorisk").eq(indeks).html());
+                microhint($(".obligatorisk").eq(indeks), "Du mangler at placere obligatoriske fag, bl.a " + $(".obligatorisk").eq(indeks).html());
                 return false;
             }
 
@@ -1240,9 +1270,10 @@ function help() {
 
         console.log("Du har " + valgfagsstimer);
 
-        var HTML = "Du skal placere flere valgfag: <br/><br/><ul class='inline_ul'>";
-
-        if (valgfagsstimer == 75) { // case 1 0-C fag
+        var HTML = "Med de valgfag du allerede har placeret, kan opnå en fuld HF ved at vælge: <br/><br/><ul class='inline_ul'>";
+        if (valgfagsstimer < 75) { // case 1 0-C fag
+            var HTML = "Du skal have 3-5 valgfag, enten: <br/><br/><ul class='inline_ul'><li>1 fag på 0-B niveau og 2 fag på C-B niveau</li><li>2 fag på 0-B niveau og 1 fag på 0-C niveau</li><li>1 fag på 0-B niveau, 1 fag på C-B niveau og 2 fag på 0-C niveau</li><li>3 fag på C-B niveau og 1 fag på 0-C niveau</li><li>4 fag på C-B niveau</li><li>2 fag på C-B niveau og 3 fag på 0-C niveau</li></ul>";
+        } else if (valgfagsstimer == 75) { // case 1 0-C fag
             HTML += "<li>2 0-B fag </li>";
             HTML += "<li>1 0-B fag, 1 C-B fag og 1 0-C fag </li>";
             HTML += "<li>3 C-B fag eller</li>";
@@ -1283,7 +1314,7 @@ function help() {
             HTML += "<li>2 0-C fag </li>";
 
         } else if (valgfagsstimer == 375) { // case 1 0-B fag og 1 0-C fag eller  1 C-B fag og 2 0-C fag
-            HTML += "<li>1 C-B eller </li> ";
+            HTML += "<li>1 C-B fag eller </li> ";
             HTML += "<li>1 0-C fag </li>";
 
         } else if (valgfagsstimer == 400) { // case 1 0-B fag og 1 0-C fag eller  1 C-B fag og 2 0-C fag
@@ -1293,7 +1324,7 @@ function help() {
             HTML += "<li>1 0-C fag </li>";
 
         } else if (valgfagsstimer > 500) {
-            HTML = "Du har for mange timer. Fjern et et eller flere valgfag";
+            var HTML = "Du har for mange valgfagstimer. Fjern et et eller flere valgfag";
         }
 
         HTML += "</ul>";
@@ -1309,6 +1340,10 @@ function help() {
         microhint($(".udvidet").eq(rand_indeks), "Du mangler at placere et udvidet fagpakkefag"); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
 
 
+
+    } else if (!$(".timer_ok_glyph").hasClass("complete_ok_glyph")) {
+
+        microhint($(".btn-var").eq(6), "Du har for mange timer, skift f.eks. et valgfag ud med et der har færre timer eller skift et B-A fag ud med et C-B fag."); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
 
     } else {
 
