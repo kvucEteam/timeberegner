@@ -28,7 +28,6 @@ $(document).ready(function() {
     $(document).on("click touchend mousemove", function() {
         console.log("Clear timer");
         window.clearTimeout(tipTimer);
-
         tipTimer = setTimeout(function() { help(); }, 30000);
     })
 
@@ -150,6 +149,7 @@ $(document).ready(function() {
 
         $(".su_timer").eq(0).hide();
         $(".semester_container").eq(0).hide();
+
     }
 
 
@@ -251,7 +251,18 @@ $(document).ready(function() {
                         klon.addClass("clone_valgfag");
 
                     }
+                    if (ui.draggable.attr("id") == "fag_9") {
 
+                        var indeks = $(this).index(".semester_content");
+                        var drop_title = $(this).find(".semester_title").html();
+                        if (drop_title[0] == "E" || $(this).index(".semester_content") < (semestre-1)) {
+                            setTimeout(function() { ui.draggable.appendTo(".dragzone"); }, 0);
+
+                            microhint($("#fag_9"), "Du skal placere  SSO i det sidste forårssemester");
+
+                            sortDivs();
+                        }
+                    }
                 }
 
 
@@ -315,15 +326,7 @@ $(document).ready(function() {
 
 
 
-            if (ui.draggable.attr("id") == "fag_9") {
-                alert($(this).index());
-                var drop_title = $(this).find(".semester_title").html();
-                if (drop_title[0] == "E") {
-                    ui.draggable.appendTo(".dragzone");
-                    microhint($("#fag_9"), "Du kan kun skrive SSO i et forårssemester")
 
-                }
-            }
 
             udregn_timer();
             set_height_containers();
@@ -354,7 +357,7 @@ $(document).ready(function() {
     loadData();
 
 
-    clicked_feedback($(".feedback_container"));
+    //clicked_feedback($(".feedback_container"));
 
 
 
@@ -1205,9 +1208,15 @@ function loadData() {
     } else {
         console.log("INGEN DATA");
     }
+
+    if ($(".dropped").length < 1) {
+        microhint($(".instruktion"), "<h4>Træk fagene til de forskellige semestre</h4><img src='img/intro.gif' class='img-responsive'>");
+    }
 }
 
 function help() {
+
+    
 
     //if (!$(".obl_fag_ok_glyph").hasClass("complete_ok_glyph")) {
     //  alert("Du har ikke styr på de obligatoriske fag");
@@ -1226,7 +1235,7 @@ function help() {
 
 
         });
-
+        $(".instructionText").html("Her kan du planlægge dit HF forløb så du er forberedt til vejledning eller tilmelding. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Træk de obligatoriske fag til semestrene</span>");
 
     } else if (!$(".opgave_ok_glyph").hasClass("complete_ok_glyph")) {
         $(".dragzone").find(".opgave").each(function() {
@@ -1236,6 +1245,8 @@ function help() {
             return false;
 
         });
+        $(".instructionText").html("Her kan du planlægge dit HF forløb så du er forberedt til vejledning eller tilmelding. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Placer EP og SSO i det sidste forårssemester </span>");
+
     } else if (!$(".krea_fag_ok_glyph").hasClass("complete_ok_glyph")) {
         var rand_indeks = Math.floor(Math.random() * $(".flexible").length);
 
@@ -1243,7 +1254,7 @@ function help() {
         microhint($(".flexible").eq(rand_indeks), "Du mangler at placere et kreativt 0-C fag som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
 
 
-
+        $(".instructionText").html("Her kan du planlægge dit HF forløb så du er forberedt til vejledning eller tilmelding. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Placer et kreativt fag</span>");
     } else if (!$(".valgfag_ok_glyph").hasClass("complete_ok_glyph")) {
 
         console.log("Du har " + valgfagsstimer);
@@ -1310,19 +1321,22 @@ function help() {
 
 
         microhint($(".glyphicon-question-sign"), HTML);
+        $(".instructionText").html("Her kan du planlægge dit HF forløb så du er forberedt til vejledning eller tilmelding. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Placer fagene, så det passer med kravne til en fuld HF og evt. SU.</span>");
 
     } else if (!$(".udvidet_fag_ok_glyph").hasClass("complete_ok_glyph") && udvidet_fagpakke == true) {
         var rand_indeks = Math.floor(Math.random() * $(".udvidet").length);
 
 
         microhint($(".udvidet").eq(rand_indeks), "Du mangler at placere et udvidet fagpakkefag"); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
-
+$(".instructionText").html("Her kan du planlægge dit HF forløb så du er forberedt til vejledning eller tilmelding. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Placer 1-2 udvidede fagpakke fag og valgfag så du når 1905 timer</span>");
 
 
     } else if (!$(".timer_ok_glyph").hasClass("complete_ok_glyph")) {
         if (totalTimer > max_timer) {
             microhint($(".btn-var").eq(6), "Du har for mange timer, skift f.eks. et valgfag ud med et der har færre timer eller skift et B-A fag ud med et C-B fag."); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
+        $(".instructionText").html("Her kan du planlægge dit HF forløb så du er forberedt til vejledning eller tilmelding. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Du mangler timer for at have en fuld HF</span>");
         } else {
+            $(".instructionText").html("Her kan du planlægge dit HF forløb så du er forberedt til vejledning eller tilmelding. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Du har for mange timer.</span>");
             if ($("#fag_58").hasClass("dropped")) {
                 microhint($(".btn-var").eq(6), "Du har valgt ikke timer nok til en fuld HF. <br/>Bemærk at Historie B-A tæller 75 timer mindre end de andre B-A fag.<br/> <br/> Vælg et andet B-A fag eller tilføj endnu et fag"); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());     
             } else {
@@ -1330,9 +1344,9 @@ function help() {
             }
         }
     } else {
-
         microhint($(".glyphicon-question-sign"), "Du har sammensat en fuld HF <br/> Hent din uddannelsesplan, send en mail til vejledningen eller tag et screenshot af siden.");
+        $(".instructionText").html("Her kan du planlægge dit HF forløb så du er forberedt til vejledning eller tilmelding. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Du er klar til at gå videre med din studieplan.</span>");
     }
 
-
+$(".instr_top").fadeOut(0).fadeIn(500);
 }
