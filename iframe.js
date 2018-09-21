@@ -12,15 +12,20 @@ var geckoFrameScrolling = 'auto';
 
 //document.write('<iframe src="index.html"  id="ost" name="bookingframe" frameborder="0" width="100%" height="" scrolling="' + geckoFrameScrolling + '" ALLOWTRANSPARENCY="true"  ></iframe>');
 alert("wrote the fucker");*/
-
+  
 
 
 
 setInterval(function() {
-    resize_iframe();
-}, 33)
+    //resize_iframe();
+}, 500)
 
-document.write('<iframe src="index.html"  frameborder="2" width="100%" height id="iframe_23055ac9db72fbd93568702ba3765db5b4591" frameborder="0" width="100%" height=""></iframe>');
+setTimeout(function() {
+    //resize_iframe();
+}, 500)
+document.write('<iframe src="https://vucdigital.dk/timeberegner/index.html" frameborder="0" width="100%" height id="udd_plan_iframe"></iframe>');
+
+
 
 var iframe_height;
 
@@ -35,13 +40,17 @@ $("document").ready(function() {
 });
 
 
-function resize_iframe() {
-    var new_height = $('iframe').contents().height();
-    console.log("new_height:" + new_height+ ",  iframe_height: " + iframe_height)
-    if(iframe_height != new_height){
-    
-    iframe_height = new_height;
-}
 
-    $("iframe").css("height", new_height + "px");
-}
+
+
+var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+  var eventer = window[eventMethod];
+  var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+  eventer(messageEvent,function(e) {
+    // If the message is a resize frame request
+    if (e.data.indexOf('resize::') != -1) {
+      var height = e.data.replace('resize::', '');
+      document.getElementById('udd_plan_iframe').style.height = height+'px';
+    }
+  } ,false);

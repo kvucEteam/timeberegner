@@ -274,3 +274,19 @@ h1{
     color: #666;
     } 
 
+
+.btn-primary{
+    background-color: #1C63BB;
+    border-color: #1C63BB;
+}
+
+.btn-primary:hover{
+    background-color: #217ced;
+}
+
+.btn-primary:active{
+    background-color: #217ced; 
+}
+
+
+
