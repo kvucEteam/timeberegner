@@ -356,10 +356,11 @@ function init() {
 
         if (i % 2) {
 
+            startsemester = "Efterår";
+            
+        } else {
             startsemester = "Forår";
             startaar++;
-        } else {
-            startsemester = "Efterår";
 
         }
 
@@ -419,14 +420,19 @@ function init() {
         $(".feedback_container").css("margin-top", "10px");
 
         function iframeResize() {
-    var height = $('body').outerHeight(); // IMPORTANT: If body's height is set to 100% with CSS this will not work.
-    parent.postMessage("resize::"+height,"*");
-  }
+            var height = $('body').outerHeight(); // IMPORTANT: If body's height is set to 100% with CSS this will not work.
+            parent.postMessage("resize::" + height, "*");
+            //var pathname = window.location.pathname;
+            /*var url = window.location.pathname;
+            parent.postMessage("resizde::" + height + "url::" + url, "*");
+            */
 
-  $(document).ready(function() {
-    // Resize iframe
-    setInterval(iframeResize, 200);
-  });
+        }
+
+        $(document).ready(function() {
+            // Resize iframe
+            setInterval(iframeResize, 200);
+        });
     }
 
 }
@@ -1040,7 +1046,7 @@ function autoudfyld(udfyld_type) {
     $(".semester_container").eq(0).hide();
 
     if (udfyld_type == "alm") {
-        semestre = 5;
+        semestre = 6;
         //alert ("SÅ er der Pølle!");
         udvidet_fagpakke = false;
         //object.html("Deaktiver udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");

@@ -16,31 +16,11 @@ alert("wrote the fucker");*/
 
 
 
-setInterval(function() {
-    //resize_iframe();
-}, 500)
-
-setTimeout(function() {
-    //resize_iframe();
-}, 500)
 document.write('<iframe src="https://vucdigital.dk/timeberegner/index.html" frameborder="0" width="100%" height id="udd_plan_iframe"></iframe>');
 
 
 
 var iframe_height;
-
-$(window).resize(function() {
-    //resize_iframe();
-
-});
-
-$("document").ready(function() {
-    //alert("ready");
-    //resize_iframe();
-});
-
-
-
 
 
 var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
@@ -48,6 +28,8 @@ var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
   var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
 
   eventer(messageEvent,function(e) {
+
+    console.log("e.data: " + e.data);
     // If the message is a resize frame request
     if (e.data.indexOf('resize::') != -1) {
       var height = e.data.replace('resize::', '');
