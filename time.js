@@ -50,8 +50,6 @@ $(document).ready(function() {
         nav_click($(this).html(), $(this));
     })
 
-
-
     $(".btn_exp").click(function() {
         clicked_btn_exp($(this));
     })
@@ -100,11 +98,18 @@ $(document).ready(function() {
 
             if ($(this).hasClass("semester_content")) {
 
+
+
+
                 var this_id = ui.draggable.attr('class').split(" ")[0];
                 var id_length = $("." + this_id).length;
 
+
                 var indeks = $(this).index(".semester_content");
                 var drop_title = $(this).find(".semester_title").html();
+
+
+                check_fagprogression(this_id, indeks);
 
                 /*----------  Hvis SU er for højt i kasserne  ----------*/
 
@@ -357,7 +362,7 @@ function init() {
         if (i % 2) {
 
             startsemester = "Efterår";
-            
+
         } else {
             startsemester = "Forår";
             startaar++;
@@ -370,6 +375,7 @@ function init() {
         if (i > semestre) {
             $(".semester_container").eq(i).hide();
         }
+           $(".semester_container").eq(20).hide();
     }
 
 
@@ -425,7 +431,7 @@ function init() {
             //var pathname = window.location.pathname;
             /*var url = window.location.pathname;
             parent.postMessage("resizde::" + height + "url::" + url, "*");
-            */
+           */
 
         }
 
@@ -579,7 +585,7 @@ function udregn_timer() {
 
 
         $(".su_display").eq(index).html(su_timer.toString().replace(".", ","));
-        if (su_timer >= 22.9 && su_timer <= 30.1) {
+        if (su_timer >= 22.9 && su_timer <= 30.5) {
             $(".su_display").eq(index).addClass("su-success");
             $(".su_display").eq(index).removeClass("su-danger");
         } else {
@@ -592,7 +598,7 @@ function udregn_timer() {
         $(".feedback").html(totalTimer); // + "/" + min_timer);
 
 
-        console.log("Num OBL: " + $(".semester_content > .obligatorisk").length + "dup: " + duplicate_fag_Array.length);
+        //console.log("Num OBL: " + $(".semester_content > .obligatorisk").length + "dup: " + duplicate_fag_Array.length);
         //$(".su_timer").eq(index).html("ost");
     });
 
@@ -680,7 +686,7 @@ function set_height_containers() {
     var maks_height = 0;
     var height = 0;
     $(".semester_content").css("min-height", "70px");
-    console.log("SET HEIGHT CALLED: maks_height: " + maks_height);
+    //console.log("SET HEIGHT CALLED: maks_height: " + maks_height);
 
     $(".semester_content").each(function(index) {
 
@@ -693,7 +699,7 @@ function set_height_containers() {
 
         if (height > maks_height) {
             maks_height = height;
-            console.log("Setting height: " + maks_height);
+            //console.log("Setting height: " + maks_height);
             maks_height = parseInt(maks_height);
 
         }
@@ -881,10 +887,10 @@ function clicked_SU(object) {
     var SU_timer = object.find("span").text(); //.toString().replace("SU-timer:", "");
     var SU_timer_Int = SU_timer.replace(",", ".");
     //var SU_timer_Int = SU_timer_Int.replace("SU-timer:","");
-    console.log(typeof(SU_timer_Int) + ": " + SU_timer_Int);
+    //console.log(typeof(SU_timer_Int) + ": " + SU_timer_Int);
     SU_timer_Int = parseFloat(SU_timer_Int);
-    console.log(typeof(SU_timer_Int) + ": " + SU_timer_Int);
-    console.log("SU_timer:  " + SU_timer + ", Int: " + SU_timer_Int);
+    //console.log(typeof(SU_timer_Int) + ": " + SU_timer_Int);
+    //console.log("SU_timer:  " + SU_timer + ", Int: " + SU_timer_Int);
     //var SU_timer = parseFloat(object.text().replace(/([^0-9\\.,])/g, ""));
 
 
@@ -1451,4 +1457,36 @@ function help() {
     }
 
     $(".instr_top").fadeOut(0).fadeIn(500);
+}
+
+function check_fagprogression(objekt_id, droppable_indeks) {
+
+    var progressions_problem = true;
+
+    var objekt_HTML = $("#" + objekt_id).html();
+    var objekt_fag = objekt_HTML.substring(0, objekt_HTML.length - 4);
+    var objekt_niveau = objekt_HTML.substring(objekt_HTML.length - 3, objekt_HTML.length);
+
+    if (objekt_niveau == "C-B" || objekt_niveau == "B-A") {
+
+        $(".dropped").each(function() {
+            var droppedfag = $(this).html();
+            var dropped_string = droppedfag.substring(0, objekt_HTML.length - 4);
+            var indeks = $(this).parent().index(".semester_content");
+            //alert("indeks: " + indeks + ", droppable" + droppable_indeks);
+
+
+            if (dropped_string == objekt_fag && indeks < droppable_indeks) {
+
+                progressions_problem = false;
+            }
+        })
+        if (progressions_problem == true) {
+            if (objekt_niveau == "C-B") {
+                setTimeout(function() { microhint($("#" + objekt_id), "For du kan have " + objekt_HTML + " skal du huske at tage " + objekt_fag + " på 0-C niveau i et tidligere semester."); }, 100);
+            } else if (objekt_niveau == "B-A") {
+                setTimeout(function() { microhint($("#" + objekt_id), "For du kan have " + objekt_HTML + " skal du huske at tage " + objekt_fag + " på C-B eller 0-B niveau i et tidligere semester."); }, 100);
+            }
+        }
+    }
 }

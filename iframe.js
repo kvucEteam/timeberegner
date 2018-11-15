@@ -16,7 +16,7 @@ alert("wrote the fucker");*/
 
 
 
-document.write('<iframe src="https://vucdigital.dk/timeberegner/index.html" frameborder="0" width="100%" height id="udd_plan_iframe"></iframe>');
+document.write('<iframe src="https://vucdigital.dk/timeberegner/index.html" frameborder="0" width="100%" height id="udd_plan_iframe" title="Uddannelsesplan HF"></iframe>');
 
 
 
