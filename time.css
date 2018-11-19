@@ -24,6 +24,12 @@
 body{
     font-family: MyWebFont;
     background-color: #FEFEFE;
+    color:#0a0a0a;  
+}
+
+.container, .container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .semester_container {
@@ -41,24 +47,26 @@ h1 {
 }
 
 
+
 .knap_container {
     margin-bottom: 20px;
-    margin-left: -3px;
+    margin-left: 0px !important;
 }
 
 .dragzone {
     min-height: 30px;
     margin-top: 10px;
-    margin-left: -4px;
+    margin-left: -1px !important;
 }
 
 .semester_content {
     padding: 4px 4px 30px 0;
     background-color: #e7e6e2;
     min-height: 70px;
-    margin: 0 -14px -1px 5px;
-    border: 0px solid #ccc;
-    //border-radius: 2px;
+    margin: 0px -14px -2px 5px;
+    border: 0px solid #777;
+//:
+    border-radius: 2px
 }
 
 
@@ -85,6 +93,8 @@ h1 {
 
 .fag_btn {
     margin: 4px;
+    padding: 2px 8px 2px 8px;
+    font-size: 14px;
 }
 
 .btn-var {
@@ -114,10 +124,12 @@ h1 {
 
 .btn_exp {
     margin: 0px;
+    font-size: 14px;
+    padding: 2px 8px 2px 8px;
 }
 
 .custom_glyphs {
-    color: #777;
+    color: #fff;
     font-size: 16px;
     margin-left: 10px;
 }
@@ -132,7 +144,7 @@ h1 {
 }
 
 .complete_ok_glyph {
-    color: green;
+    color: #292929;
     opacity: 1;
 }
 
@@ -148,18 +160,21 @@ h1 {
     cursor: pointer;
     width: auto;
     margin-top: -10px;
-    background-color: #fff;
-    margin-left: 0px;
+    /* background-color: #fff; */
+    margin-left: 0px !important;
     border: 1px solid #999;
-    padding: 2px 3px 2px 10px;
+    padding: 2px 4px 2px 14px;
     //
     border-radius: 3px;
     margin-top: -20px;
     margin-bottom: 20px;
+    margin-left: 3px !important;
+    font-size: 16px;
 }
 
 .videre_container {
     margin-top: 20px;
+    margin-left: 0px !important;
 }
 
 .overlay {
@@ -177,9 +192,8 @@ h1 {
 }
 
 .btn-end {
-    margin-right: 4px;
-    margin-bottom: 6px;
-    font-size: 11px;
+   
+    /*font-size: 11px;*/
 }
 
 .MsgBox_bgr {
@@ -191,17 +205,16 @@ h1 {
 }
 
 .labelcontainer {
-    
-    padding-left: 15px;
+    padding-left: 18px;
     margin-bottom: 0px;
 }
 
 .su-success {
-    color: rgb(0,150,0);
+    color: #0a0a0a;
 }
 
 .su-danger {
-    color: rgb(240,80,0);
+    color: #f05050;
     /*! background-color: rgba(255, 0, 0, .4); */
 }
 
@@ -217,7 +230,8 @@ h1{
 
 
 #semester_app{
-    margin-left:-5px
+    margin-left: -2px;
+    padding: 0px;
 }
 
 .inline_ul{
@@ -271,7 +285,10 @@ h1{
 }
 
 .custom_glyphs{
-    color: #666;
+    color: #fff;
+    font-size: .9em;
+    margin: 5px -3px 11px 8px;
+    margin: bottom;
     } 
 
 
@@ -284,9 +301,125 @@ h1{
     background-color: #217ced;
 }
 
-.btn-primary:active{
-    background-color: #217ced; 
+.btn-primary:active {
+    background-color: #217ced !important; 
+}
+
+.btn-success{
+    background-color: #1dafec;
+    border-color: #1dafec;
+}
+
+.btn-success:hover{
+    background-color: #62c4ea;
+    border-color: #62c4ea;
+}
+
+.btn-success:active {
+    background-color: #62c4ea !important; 
+    border-color: #62c4ea !important; 
+}
+
+
+.opgave{
+    background-color: #292929 !important;
+    border-color: #292929;
+}
+
+.opgave:hover{
+    background-color: #686868 !important;
+    border-color: #686868 !important;
+}
+
+.opgave:active {
+    background-color: #686868 !important; 
+    border-color: #686868 !important; 
+}
+
+.btn-warning{
+    background-color: #c3c4c6 !important;
+    border-color: #c3c4c6;
+}
+
+.btn-warning:hover{
+    background-color: #9f9fa0 !important;
+    border-color: #9f9fa0 !important;
+}
+
+.btn-warning:active {
+    background-color: #9f9fa0 !important; 
+    border-color: #9f9fa0 !important; 
+}
+
+.btn-info{
+    background-color: #292929 !important;
+    color: white;
+    border-color: #292929;
+}
+
+.btn-info:hover{
+    background-color: #d1d1d3 !important;
+    border-color: #d1d1d3 !important;
+    color: white;
+}
+
+.btn-info:active {
+    color: white;
+    background-color: #9f9fa0 !important; 
+    border-color: #9f9fa0 !important; 
 }
 
 
 
+/*Obligatoriske fag: KVUC Blå - #1c63bb 
+
+Valgfag: HF blå - #1dafec  
+
+SSO og EP: KVUC sort - #292929 
+
+Udvidet fagpakke: Mørkegrå - #c3c4c6 
+
+Grå bokse (fx semesterbokse, hent uddannelsesplan): Lysegrå - #f6f6f9 
+
+Værktøjsknapper (fx tilføj semester, vis forslag, hjælp): KVUC sort, #292929, og hvid font, #ffffff 
+
+Flueben: Grå og KVUC sort #292929 
+
+ 
+
+Fonte 
+
+Brødtekst (på hvid/lysegrå baggrund): #0a0a0a 
+
+Tekst på mørk baggrund: #ffffff 
+
+SU timer (opsummerende timetal): For få timer/for mange timer rød #f05050, tilpas antal timer #0a0a0a*/
+
+
+.btn-var{
+    font-size: 1.1em !important;
+    text-transform: uppercase;
+    padding: 5px 10px 1px 17px;
+}
+.btn-var:hover{
+    background-color: #4F4F4F !important;
+    color: ##4F4F4F !important; 
+}
+.btn-var:focus{
+    color: white !important;
+}
+
+a{
+    text-decoration: none !important;
+    color: white;
+}
+
+a:hover{
+    text-decoration: none !important;
+    color: white;
+}
+
+.outer_container{
+    margin-left: -12px;
+    padding: -10px;
+}

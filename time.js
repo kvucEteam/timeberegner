@@ -19,7 +19,11 @@ var valgfag = 0,
     tipTimer,
     mouseAction = 3000,
     startaar = 2018,
-    startsemester = "Efterår";
+    startsemester = "Efterår",
+    saveData;
+
+
+
 
 
 
@@ -68,6 +72,51 @@ $(document).ready(function() {
 
     $(".send_email").click(function() {
         send_email();
+
+    });
+
+    $(".btn-var").mouseover(function() {
+        var indeks = $(this).index(".btn-var");
+
+
+        microhint($(this), jsonData.knaptekster[indeks]);
+
+
+    });
+
+    $(".btn-var").mouseout(function() {
+        $(".microhint").remove();
+    });
+
+
+    $(".tilmeld_link").click(function() {
+
+        var tilmeld_fag = "https://tilmeld.kvuc.dk/?SelectedEducationType=Gym&SelectedCourseLevel=0-C&SelectedCourseLevel=B-A&SelectedSubjects=%5B";
+
+        for (var i = 0; i < saveData[2].length; i++) {
+            var fag = $("#" + saveData[2][i]).text().split(" ", 1);
+            if (i !== saveData[2].length - 1) {
+                //alert("case1");
+                tilmeld_fag += "%22Gym%23%23%23" + fag + "%22%2C";
+            } else {
+                //alert("case2");
+                tilmeld_fag += "%22Gym%23%23%23" + fag + "%22%5D";
+                //alert(fag)
+            }
+        }
+        //tilmeld_fag += "%22%5D";
+        //alert(tilmeld_fag);
+
+        //alert(tilmeld_fag);
+
+
+        location.href = tilmeld_fag;
+
+        //https://tilmeld.kvuc.dk/?SelectedEducationType=Gym&SelectedSubjects=%5B%22Gym%23%23%23Engelsk%22%2C%22Gym%23%23%23Geografi%22%5D
+
+
+
+        //3fag https://tilmeld.kvuc.dk/?SelectedEducationType=Gym&SelectedSubjects=%5B%22Gym%23%23%23Engelsk%22%2C%22Gym%23%23%23Filosofi%22%2C%22Gym%23%23%23Geografi%22%5D
 
     });
 
@@ -375,7 +424,7 @@ function init() {
         if (i > semestre) {
             $(".semester_container").eq(i).hide();
         }
-           $(".semester_container").eq(20).hide();
+        $(".semester_container").eq(20).hide();
     }
 
 
@@ -468,7 +517,7 @@ function udregn_timer() {
 
     var duplicate_fag_Array = [];
 
-    var saveData = [
+    saveData = [
         [udvidet_fagpakke, semestre, autoudfyldt, merit]
     ];
 
@@ -523,6 +572,7 @@ function udregn_timer() {
             saveData[semester_indeks + 1].push($(this).attr("id"));
 
             console.log("saveData: ", saveData);
+
 
             /*
              */
