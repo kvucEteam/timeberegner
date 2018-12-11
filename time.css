@@ -22,7 +22,7 @@
 }
 
 body{
-    font-family: MyWebFont;
+    font-family: MyWebFont, Arial, Sans-serif;
     background-color: #FEFEFE;
     color:#0a0a0a;  
 }
@@ -39,7 +39,7 @@ body{
 }
 
 .btn, h1, .instructionText{
-    font-family: MyWebFont;
+    font-family: MyWebFont, arial, Sans-serif !important;
 }
 
 h1 {
@@ -150,10 +150,10 @@ h1 {
 
 .semester_title {
     margin-top: -29px;
-    font-size: 12px;
-    margin-left: 5px;
+    font-size: 14px;
+    margin-left: 1px;
     margin-bottom: 0px;
-    margin-top: -24px;
+    margin-top: -27px;
 }
 
 .feedback_container {
@@ -337,8 +337,8 @@ h1{
 }
 
 .btn-warning{
-    background-color: #c3c4c6 !important;
-    border-color: #c3c4c6;
+    background-color: #7f7f7f !important;
+    border-color: #7f7f7f;
 }
 
 .btn-warning:hover{
@@ -349,6 +349,10 @@ h1{
 .btn-warning:active {
     background-color: #9f9fa0 !important; 
     border-color: #9f9fa0 !important; 
+}
+
+.btn_exp:active{
+    
 }
 
 .btn-info{
@@ -371,35 +375,35 @@ h1{
 
 
 
-/*Obligatoriske fag: KVUC Blå - #1c63bb 
+/*Obligatoriske fag: KVUC BlÃ¥ - #1c63bb 
 
-Valgfag: HF blå - #1dafec  
+Valgfag: HF blÃ¥ - #1dafec  
 
 SSO og EP: KVUC sort - #292929 
 
-Udvidet fagpakke: Mørkegrå - #c3c4c6 
+Udvidet fagpakke: MÃ¸rkegrÃ¥ - #c3c4c6 
 
-Grå bokse (fx semesterbokse, hent uddannelsesplan): Lysegrå - #f6f6f9 
+GrÃ¥ bokse (fx semesterbokse, hent uddannelsesplan): LysegrÃ¥ - #f6f6f9 
 
-Værktøjsknapper (fx tilføj semester, vis forslag, hjælp): KVUC sort, #292929, og hvid font, #ffffff 
+VÃ¦rktÃ¸jsknapper (fx tilfÃ¸j semester, vis forslag, hjÃ¦lp): KVUC sort, #292929, og hvid font, #ffffff 
 
-Flueben: Grå og KVUC sort #292929 
+Flueben: GrÃ¥ og KVUC sort #292929 
 
  
 
 Fonte 
 
-Brødtekst (på hvid/lysegrå baggrund): #0a0a0a 
+BrÃ¸dtekst (pÃ¥ hvid/lysegrÃ¥ baggrund): #0a0a0a 
 
-Tekst på mørk baggrund: #ffffff 
+Tekst pÃ¥ mÃ¸rk baggrund: #ffffff 
 
-SU timer (opsummerende timetal): For få timer/for mange timer rød #f05050, tilpas antal timer #0a0a0a*/
+SU timer (opsummerende timetal): For fÃ¥ timer/for mange timer rÃ¸d #f05050, tilpas antal timer #0a0a0a*/
 
 
 .btn-var{
     font-size: 1.1em !important;
     text-transform: uppercase;
-    padding: 5px 10px 1px 17px;
+    padding: 5px 17px 1px 17px;
 }
 .btn-var:hover{
     background-color: #4F4F4F !important;
@@ -422,4 +426,15 @@ a:hover{
 .outer_container{
     margin-left: -12px;
     padding: -10px;
+}
+
+.svg_img{
+    filter: invert(1);
+    height: 33px;
+    margin-top: -4px;
+    padding: 4px 0px 4px 4px;
+}
+
+.container-fluid{
+    padding-right: 5px!important;
 }

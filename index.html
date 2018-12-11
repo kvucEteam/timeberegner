@@ -33,6 +33,17 @@
                 <div id="explanationwrapper"></div>
             </div>
             <div class="col-xs-12 knap_container">
+                                <div class="download-btn btn btn-info btn-sm btn-var">Hent uddannelsesplan 
+                    <span class="glyphicons glyphicons-download-alt custom_glyphs"></span> 
+                </div>
+                <div class="send_email btn btn-info btn-sm btn-var">E-mail uddannelsesplan 
+                    <!-- <img class="svg_img svg" src="img/email.svg"> -->
+                    <span class="glyphicons glyphicons-envelope custom_glyphs"></span> 
+                </div>
+              
+                <div class="tilmeld_link btn btn-info btn-var">
+                    Tilmeld dig <span class="glyphicon glyphicon-pencil custom_glyphs"></span> 
+                </div>
             </div>
             <div id="semester_app" class="row ">
             </div>
@@ -49,16 +60,9 @@
         <div id="posY "></div>
  -->
             <div class="col-xs-12 videre_container">
-                <div class="download-btn btn btn-info btn-sm btn-var">Hent uddannelsesplan.docx 
-                    <span class="glyphicons glyphicons-download-alt custom_glyphs"></span> 
-                </div>
-                <div class="send_email btn btn-info btn-sm btn-var">Send din uddannelsesplan til hf-vejledningen 
-                    <span class="glyphicons glyphicons-envelope custom_glyphs"></span> 
-                </div>
-              
-                <div class="tilmeld_link btn btn-info btn-var">
-                    Tilmeld dig <span class="glyphicon glyphicon-pencil custom_glyphs"></span> 
-                </div>
+
+
+                
             </div>
             <div class="saveConsole"></div>
         </div>
@@ -78,12 +82,15 @@
 <script src="../library/js/filesaver.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    console.log("Attempt AJAX load")
     getAjaxData("GET", "json/time_fill.json", false, "json ");
-    one_line_footer();
+    console.log("AJAX load complete")
 
+    one_line_footer();
+console.log("one_line_footer_complete");
 });
 </script>
-<script type="text/javascript " src="time.js "></script>
+<script src="time.js "></script>
 </body>
 
 </html>

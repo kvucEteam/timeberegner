@@ -44,7 +44,7 @@ $(document).ready(function() {
 
 
 
-
+    console.log("jsonData");
     console.log(jsonData);
     /*=======================================
     =            Event listening            =
@@ -65,6 +65,13 @@ $(document).ready(function() {
     $(".feedback_container").click(function() {
         clicked_feedback($(this));
     });
+    $(".feedback_container").mouseover(function() {
+        clicked_feedback($(this));
+    });
+
+    $(".feedback_container").mouseout(function() {
+        $(".microhint").remove();
+    });
 
     $(".download-btn").click(function() {
         download_word_file();
@@ -77,11 +84,7 @@ $(document).ready(function() {
 
     $(".btn-var").mouseover(function() {
         var indeks = $(this).index(".btn-var");
-
-
         microhint($(this), jsonData.knaptekster[indeks]);
-
-
     });
 
     $(".btn-var").mouseout(function() {
@@ -94,7 +97,8 @@ $(document).ready(function() {
         var tilmeld_fag = "https://tilmeld.kvuc.dk/?SelectedEducationType=Gym&SelectedCourseLevel=0-C&SelectedCourseLevel=B-A&SelectedSubjects=%5B";
 
         for (var i = 0; i < saveData[2].length; i++) {
-            var fag = $("#" + saveData[2][i]).text().split(" ", 1);
+            var fag = $("#" + saveData[2][i]).text(); //.split(" ", 1);
+            fag = fag.substring(0, fag.length - 4);
             if (i !== saveData[2].length - 1) {
                 //alert("case1");
                 tilmeld_fag += "%22Gym%23%23%23" + fag + "%22%2C";
@@ -109,8 +113,10 @@ $(document).ready(function() {
 
         //alert(tilmeld_fag);
 
+        //alert(tilmeld_fag);
 
-        location.href = tilmeld_fag;
+
+        window.open(tilmeld_fag);
 
         //https://tilmeld.kvuc.dk/?SelectedEducationType=Gym&SelectedSubjects=%5B%22Gym%23%23%23Engelsk%22%2C%22Gym%23%23%23Geografi%22%5D
 
@@ -398,8 +404,8 @@ function init() {
 
 
 
-    for (var i = 0; i < jsonData.knapper.length; i++) {
-        $(".knap_container").append("<button class='btn btn-sm btn-info btn-var'>" + jsonData.knapper[i].tekst + "</button>");
+    for (var i = jsonData.knapper.length - 1; i >= 0; i--) {
+        $(".knap_container").prepend("<button class='btn btn-sm btn-info btn-var'>" + jsonData.knapper[i].tekst + "</button>");
     }
 
     /* lav containere */
@@ -490,6 +496,19 @@ function init() {
         });
     }
 
+    inIframe();
+
+}
+
+function inIframe() {
+
+    if (window.self !== window.top) {
+        $(".container-fluid").css("margin", "0px");
+        $(".container-fluid").css("padding-right", "5px")
+
+    } else {
+        //alert("not in frame");
+    }
 }
 
 
@@ -1271,10 +1290,18 @@ function addListeners() {
 
 function loadData() {
 
+
+
+
+
+
+
     window.osc = Object.create(objectStorageClass);
 
     var TjsonData = osc.load('timeData');
     console.log('returnLastStudentSession - TjsonData: ' + JSON.stringify(TjsonData));
+
+
 
     if (TjsonData) {
 
@@ -1309,7 +1336,7 @@ function loadData() {
 
 
         for (var i = 1; i < semestre + 2; i++) {
-            //console.log("OST??:" + TjsonData[i].length);
+
 
 
             for (var o = 0; o < TjsonData[i].length; o++) {
