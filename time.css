@@ -65,7 +65,7 @@ h1 {
     min-height: 70px;
     margin: 0px -14px -2px 5px;
     border: 0px solid #777;
-//:
+
     border-radius: 2px
 }
 
@@ -86,7 +86,6 @@ h1 {
     position: absolute;
     right: 2px;
     bottom: -3px;
-    //border-radius:2PX;
     padding: 0px 2px 0px 2px;
     cursor: pointer;
 }
@@ -114,7 +113,7 @@ h1 {
     position: absolute;
     background-color: white;
     font-size: 9px;
-    //border-radius: 4px;
+    
     padding: 1px 3px 0px 3px;
     transform: rotate(0deg);
     right: -4px;
@@ -164,7 +163,7 @@ h1 {
     margin-left: 0px !important;
     border: 1px solid #999;
     padding: 2px 4px 2px 14px;
-    //
+
     border-radius: 3px;
     margin-top: -20px;
     margin-bottom: 20px;
@@ -186,7 +185,7 @@ h1 {
     z-index: 102;
     color: white;
     text-align: center;
-    //border-radius: 10px;
+    border-radius: 10px;
     text-shadow: 6px 6px 11px #222;
     padding-top: 3%;
 }
@@ -244,7 +243,7 @@ h1{
 }
 
 .mh_bgr{
-    background-color: #2a2a2a;
+    background-color: #1c63bb;
     position: absolute;
     top: 0;
     left: 0;
@@ -254,9 +253,9 @@ h1{
 }
 
 .triangle{
-    color: #2a2a2a;
+    color: #1c63bb;
     z-index: -4;
-    text-shadow: none;
+    text-shadow: 2px 2px 5px black;
 
 }
 
@@ -266,12 +265,12 @@ h1{
 
 
 .microhint {
-    background-color: #2a2a2a;
+    background-color: #1c63bb;
     border-radius: 0px;
     z-index: 1000;
     font-size: 15px;
     margin: 10px;
-    box-shadow: none;
+    box-shadow: 2px 2px 5px #999;
 }
 
 
@@ -351,6 +350,21 @@ h1{
     border-color: #9f9fa0 !important; 
 }
 
+.btn-danger{
+    background-color: #f05050 !important;
+    border-color: #f05050;
+}
+
+.btn-danger:hover{
+    background-color: #ed6363 !important;
+    border-color: #ed6363 !important;
+}
+
+.btn-danger:active {
+    background-color: #f05050 !important; 
+    border-color: #f05050 !important; 
+}
+
 .btn_exp:active{
     
 }
@@ -407,7 +421,7 @@ SU timer (opsummerende timetal): For fÃ¥ timer/for mange timer rÃ¸d #f05050,
 }
 .btn-var:hover{
     background-color: #4F4F4F !important;
-    color: ##4F4F4F !important; 
+    color: white !important; 
 }
 .btn-var:focus{
     color: white !important;
@@ -437,4 +451,15 @@ a:hover{
 
 .container-fluid{
     padding-right: 5px!important;
+}
+
+.btn-video{
+    padding: 3px 10px 3px 11px;
+    margin-top: -6px;
+}
+
+    .CloseClass{margin-top: -20px;
+    margin-right: -30px;
+    z-index: 1000;
+    padding: 0px;
 }

@@ -38,8 +38,8 @@ $(document).ready(function() {
 
     $(".saveConsole").hide();
 
-    $('.instr_container').html(instruction_noLines("Her kan du planlægge dit HF forløb. Så er du forberedt til vejledning eller tilmelding. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> Find de fag du ønsker, og træk dem fra faglisten til semesterkasserne. ")); // Tilføjet af THAN d. 02/01-2018.
-
+    $('.instr_container').html(instruction_noLines("Her kan du planlægge dit HF forløb. Så er du forberedt til vejledning eller tilmelding. <span class='btn btn-video btn-info'>Instruktion <span class='glyphicon glyphicon-play'> </span></span><br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> Find de fag du ønsker, og træk dem fra faglisten til semesterkasserne.")); // Tilføjet af THAN d. 02/01-2018.
+    $('.instr_container').append("");
     init();
 
 
@@ -91,7 +91,9 @@ $(document).ready(function() {
         $(".microhint").remove();
     });
 
-
+    $(".vejl_link").click(function() {
+        window.open("https://kvuc.dk/vejledning/hf-vejledningen/");
+    });
     $(".tilmeld_link").click(function() {
 
         var tilmeld_fag = "https://tilmeld.kvuc.dk/?SelectedEducationType=Gym&SelectedCourseLevel=0-C&SelectedCourseLevel=B-A&SelectedSubjects=%5B";
@@ -130,6 +132,14 @@ $(document).ready(function() {
         $(".overlay").fadeOut();
     });
 
+
+    $(".btn-video").click(function() {
+
+        UserMsgBox_xclick('body', '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://player.vimeo.com/video/306797454" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>');
+
+
+
+    })
     addListeners();
     $(".new_window_link").remove();
 
@@ -152,8 +162,6 @@ $(document).ready(function() {
 
 
             if ($(this).hasClass("semester_content")) {
-
-
 
 
                 var this_id = ui.draggable.attr('class').split(" ")[0];
@@ -248,9 +256,9 @@ $(document).ready(function() {
 
                             if (ui.draggable.html() == "Dansk 0-A") {
 
-                                microhint(ui.draggable, ui.draggable.html() + " kan tages både halv og helårligt.<br/> Vi anbefaler, at du læser " + ui.draggable.html() + " over to semestre. <br/>Træk kopien af " + ui.draggable.html() + " knappen fra bunden og til et andet semester.")
+                                microhint(ui.draggable, ui.draggable.html() + " kan tages både halv og helårligt.<br/> Vi anbefaler, at du læser " + ui.draggable.html() + " over to semestre. <br/>Træk kopien af " + ui.draggable.html() + " knappen fra bunden og til et det efterfølgende semester.")
                             } else {
-                                microhint(ui.draggable, ui.draggable.html() + " kan tages både halv og helårligt.<br/> Træk kopien af " + ui.draggable.html() + " knappen fra bunden og til et andet semester, hvis du vil tage faget over to semestre.")
+                                microhint(ui.draggable, ui.draggable.html() + " kan tages både halv og helårligt.<br/> Træk kopien af " + ui.draggable.html() + " knappen fra bunden og til et det efterfølgende semester, hvis du vil tage faget over to semestre.")
                             }
 
 
@@ -274,7 +282,54 @@ $(document).ready(function() {
 
                         ui.draggable.addClass("helaarmode");
 
+
+                        if ($("." + ui.draggable.attr("id")).eq(0).hasClass("dropped") && $("." + ui.draggable.attr("id")).eq(1).hasClass("dropped")) {
+                            //alert("Der er tale om en dobbelt ost");
+                            //alert("drop_container: " + indeks);
+                            var container_indeks_0 = $("." + ui.draggable.attr("id")).eq(0).parent().parent().index();
+                            var container_indeks_1 = $("." + ui.draggable.attr("id")).eq(1).parent().parent().index();
+
+                            if ((container_indeks_1 - container_indeks_0) == 0) {
+                                microhint(ui.draggable, "Du skal placere faget i to forskellige semestre for at tage dem halvårligt");
+
+                                ui.draggable.animate({
+                                    opacity: 0,
+
+                                }, 1500, function() {
+
+                                    $(".dragzone").append(ui.draggable);
+                                    sortDivs();
+                                    udregn_timer();
+                                    ui.draggable.animate({
+                                        opacity: 1,
+
+                                    }, 500);
+                                });
+                            } else if ((container_indeks_1 - container_indeks_0) > 1) {
+                                microhint(ui.draggable, "Du skal placere faget umiddelbart før eller efter det semester, hvor du har placeret " + ui.draggable.html() + " Der må ikke være et tomt semester imellem.");
+
+                                ui.draggable.animate({
+                                    opacity: 0,
+
+                                }, 1500, function() {
+
+                                    $(".dragzone").append(ui.draggable);
+                                    sortDivs();
+                                    udregn_timer();
+                                    ui.draggable.animate({
+                                        opacity: 1,
+
+                                    }, 500);
+                                });
+
+                            }
+                            //alert(indekseret);
+                        }
+
                     }
+
+
+
 
 
                     /*----------  Check kreative fag  ----------*/
@@ -651,7 +706,7 @@ function udregn_timer() {
 
 
 
-
+        su_timer = Math.round( su_timer * 100 ) / 100;
 
         $(".su_display").eq(index).html(su_timer.toString().replace(".", ","));
         if (su_timer >= 22.9 && su_timer <= 30.5) {
@@ -1192,7 +1247,7 @@ function autoudfyld(udfyld_type) {
 
 
     $(".semester_container").each(function(index) {
-        if (index > semestre ||  index == 0) {
+        if (index > semestre || index == 0) {
             $(this).fadeOut();
         } else if (index < semestre + 1) {
             $(this).fadeIn();
@@ -1290,12 +1345,6 @@ function addListeners() {
 
 function loadData() {
 
-
-
-
-
-
-
     window.osc = Object.create(objectStorageClass);
 
     var TjsonData = osc.load('timeData');
@@ -1347,8 +1396,11 @@ function loadData() {
                     var klon = fag.clone();
                     klon.addClass("clone");
                     $(".semester_content").eq(i - 1).append(klon);
+                    $(".dragzone").find("#" + TjsonData[i][o]).remove();
                 } else {
                     $(".semester_content").eq(i - 1).append(fag);
+                    var klon = fag.clone();
+                    $(".dragzone").append(klon);
                 }
 
                 //console.log("NOGET AT FINDE? " + $(".semester_content").find(fag).length); 
@@ -1360,8 +1412,6 @@ function loadData() {
 
             }
         }
-
-
 
         sortDivs();
         set_height_containers();
