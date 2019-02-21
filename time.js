@@ -23,10 +23,6 @@ var valgfag = 0,
     saveData;
 
 
-
-
-
-
 $(document).ready(function() {
 
     $(document).on("click touchend mousemove", function() {
@@ -37,8 +33,8 @@ $(document).ready(function() {
 
 
     $(".saveConsole").hide();
-
-    $('.instr_container').html(instruction_noLines("Her kan du planlægge dit HF forløb. Så er du forberedt til vejledning eller tilmelding. <span class='btn btn-video btn-info'>Instruktion <span class='glyphicon glyphicon-play'> </span></span><br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> Find de fag du ønsker, og træk dem fra faglisten til semesterkasserne.")); // Tilføjet af THAN d. 02/01-2018.
+    //$(".instructionText").html("Her kan du få inspiration til at planlægge dit HF forløb. <br/>Objektet er et værktøj som kan hjælpe dig til at få overblik over en fuld HF, men KVUC kan ikke garantere, at den plan du laver her kan lade sig gøre i virkeligheden. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Placer 1-2 udvidede fagpakke fag og valgfag så du kommer op på mindst 1905 timer</span>");
+    $('.instr_container').html(instruction_noLines("Her kan du få inspiration til at planlægge dit HF forløb. <br/>Objektet er et værktøj, som kan hjælpe dig til at få overblik over en fuld HF. Planen skal gennemgås og godkendes af en studievejleder  <span class='btn btn-video btn-info'>Instruktion <span class='glyphicon glyphicon-play'> </span></span><br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> Find de fag du ønsker, og træk dem fra faglisten til semesterkasserne.")); // Tilføjet af THAN d. 02/01-2018.
     $('.instr_container').append("");
     init();
 
@@ -84,7 +80,7 @@ $(document).ready(function() {
 
     $(".btn-var").mouseover(function() {
         var indeks = $(this).index(".btn-var");
-        microhint($(this), jsonData.knaptekster[indeks]);
+        microhint($(this), jsonData.knaptekster[indeks], true);
     });
 
     $(".btn-var").mouseout(function() {
@@ -101,13 +97,23 @@ $(document).ready(function() {
         for (var i = 0; i < saveData[2].length; i++) {
             var fag = $("#" + saveData[2][i]).text(); //.split(" ", 1);
             fag = fag.substring(0, fag.length - 4);
-            if (i !== saveData[2].length - 1) {
-                //alert("case1");
-                tilmeld_fag += "%22Gym%23%23%23" + fag + "%22%2C";
+            if (fag == "Kulturfagsk") {
+                tilmeld_fag += "%22Gym%23%23%23historie%22%2C";
+                tilmeld_fag += "%22Gym%23%23%23religion%22%2C";
+
+
+
+            } else if (fag == "Naturfagsk") {
+
             } else {
-                //alert("case2");
-                tilmeld_fag += "%22Gym%23%23%23" + fag + "%22%5D";
-                //alert(fag)
+                if (i !== saveData[2].length - 1) {
+                    //alert("case1");
+                    tilmeld_fag += "%22Gym%23%23%23" + fag + "%22%2C";
+                } else {
+                    //alert("case2");
+                    tilmeld_fag += "%22Gym%23%23%23" + fag + "%22%5D";
+                    //alert(fag)
+                }
             }
         }
         //tilmeld_fag += "%22%5D";
@@ -117,7 +123,7 @@ $(document).ready(function() {
 
         //alert(tilmeld_fag);
 
-
+        alert(fag + "," + tilmeld_fag);
         window.open(tilmeld_fag);
 
         //https://tilmeld.kvuc.dk/?SelectedEducationType=Gym&SelectedSubjects=%5B%22Gym%23%23%23Engelsk%22%2C%22Gym%23%23%23Geografi%22%5D
@@ -160,6 +166,7 @@ $(document).ready(function() {
         tolerance: "touch",
         drop: function(e, ui) {
 
+            var microhint_streng = "<h4 class='micro_H4'>OBS</h4>";
 
             if ($(this).hasClass("semester_content")) {
 
@@ -171,9 +178,9 @@ $(document).ready(function() {
                 var indeks = $(this).index(".semester_content");
                 var drop_title = $(this).find(".semester_title").html();
 
-
-                check_fagprogression(this_id, indeks);
-
+                if (check_fagprogression(this_id, indeks)) {
+                    microhint_streng += check_fagprogression(this_id, indeks);
+                }
                 /*----------  Hvis SU er for højt i kasserne  ----------*/
 
                 var this_sutimer = parseInt($(this).find(".su_display").html());
@@ -181,8 +188,14 @@ $(document).ready(function() {
                 /*----------  Hvi der er for mange timer allerede   ----------*/
 
 
-                if (this_sutimer > 35 && $(this).index(".semester_content") != 0) {
-                    microhint($(this), "Du har allerede " + this_sutimer + " SU timer i dette semester. Placer faget i et andet semester.");
+
+
+                /*if (this_sutimer > 50 && $(this).index(".semester_content") != 0) {
+                    console.log("FOR MANGE SU TIMER kaldt")
+                    //microhint($(this), "OBS! Du har allerede " + this_sutimer + " SU timer i dette semester. Placer faget i et andet semester.", true);
+
+                    microhint_streng += "Du har allerede " + this_sutimer + " SU timer i dette semester. Placer faget i et andet semester.<br/><br/>";
+
                     setTimeout(function() {
                         ui.draggable.animate({
                             left: 0,
@@ -198,11 +211,13 @@ $(document).ready(function() {
                         });
                     }, 200);
                     sortDivs();
+} */
+                /*----------  Check om det er en SSO der bliver placeret uregelementeret  ----------*/
 
-                    /*----------  Check om det er en SSO der bliver placeret uregelementeret  ----------*/
 
 
-                } else if (ui.draggable.attr("id") == "fag_9" && (drop_title[0] == "E" || indeks < (semestre - 1))) {
+
+                if (ui.draggable.attr("id") == "fag_9" && (drop_title[0] == "E" || indeks < (semestre - 1))) {
 
 
 
@@ -226,7 +241,9 @@ $(document).ready(function() {
 
                     }, 200);
 
-                    microhint($("#fag_9"), "Du skal placere  SSO i det sidste forårssemester");
+                    microhint($("#fag_9"), "Du skal placere  SSO i det sidste forårssemester", true);
+
+                    microhint_streng += "Du skal placere  SSO i det sidste forårssemester</li>"
 
                     sortDivs();
 
@@ -248,6 +265,11 @@ $(document).ready(function() {
                     /*----------  Check for helårsfag:  ----------*/
 
 
+                    /* Warning ved for mange fag: */
+
+
+
+
                     if (id_length < 2) {
 
                         if (ui.draggable.hasClass("helaar")) {
@@ -256,9 +278,12 @@ $(document).ready(function() {
 
                             if (ui.draggable.html() == "Dansk 0-A") {
 
-                                microhint(ui.draggable, ui.draggable.html() + " kan tages både halv og helårligt.<br/> Vi anbefaler, at du læser " + ui.draggable.html() + " over to semestre. <br/>Træk kopien af " + ui.draggable.html() + " knappen fra bunden og til et det efterfølgende semester.")
+                                microhint_streng += ui.draggable.html() + " kan tages både halv og helårligt.<br/> Vi anbefaler, at du læser " + ui.draggable.html() + " over to semestre. <br/>Træk kopien af " + ui.draggable.html() + " knappen fra bunden og til et det efterfølgende semester.<br/><br/>";
+
+                                //microhint(ui.draggable, ui.draggable.html() + " kan tages både halv og helårligt.<br/> Vi anbefaler, at du læser " + ui.draggable.html() + " over to semestre. <br/>Træk kopien af " + ui.draggable.html() + " knappen fra bunden og til et det efterfølgende semester.", true)
                             } else {
-                                microhint(ui.draggable, ui.draggable.html() + " kan tages både halv og helårligt.<br/> Træk kopien af " + ui.draggable.html() + " knappen fra bunden og til et det efterfølgende semester, hvis du vil tage faget over to semestre.")
+                                microhint_streng += ui.draggable.html() + " kan tages både halv og helårligt.<br/> Træk kopien af " + ui.draggable.html() + " knappen fra bunden og til et det efterfølgende semester, hvis du vil tage faget over to semestre.<br/><br/>";
+                                //microhint(ui.draggable, ui.draggable.html() + " kan tages både halv og helårligt.<br/> Træk kopien af " + ui.draggable.html() + " knappen fra bunden og til et det efterfølgende semester, hvis du vil tage faget over to semestre.", true)
                             }
 
 
@@ -290,7 +315,8 @@ $(document).ready(function() {
                             var container_indeks_1 = $("." + ui.draggable.attr("id")).eq(1).parent().parent().index();
 
                             if ((container_indeks_1 - container_indeks_0) == 0) {
-                                microhint(ui.draggable, "Du skal placere faget i to forskellige semestre for at tage dem halvårligt");
+                                //microhint(ui.draggable, "Du skal placere faget i to forskellige semestre for at tage dem halvårligt", true);
+                                microhint_streng += "Du skal placere " + ui.draggable.html() + " i to forskellige semestre for at tage faget helårligt<br/><br/>";
 
                                 ui.draggable.animate({
                                     opacity: 0,
@@ -306,7 +332,9 @@ $(document).ready(function() {
                                     }, 500);
                                 });
                             } else if ((container_indeks_1 - container_indeks_0) > 1) {
-                                microhint(ui.draggable, "Du skal placere faget umiddelbart før eller efter det semester, hvor du har placeret " + ui.draggable.html() + " Der må ikke være et tomt semester imellem.");
+                                //microhint(ui.draggable, "Du skal placere faget umiddelbart før eller efter det semester, hvor du har placeret " + ui.draggable.html() + " Der må ikke være et tomt semester imellem.", true);
+                                microhint_streng += "Du skal placere " + ui.draggable.html() + " umiddelbart før eller efter det semester, hvor du har placeret faget i forvejen. <br/><br/>";
+
 
                                 ui.draggable.animate({
                                     opacity: 0,
@@ -336,7 +364,8 @@ $(document).ready(function() {
 
                     if (ui.draggable.hasClass("flexible")) {
                         if (kreative_fag < 2) {
-                            microhint(ui.draggable, "Du har placeret et kreativt fag. Du skal have et kreativt fag som obligatorisk. Derudover skal du vælge 3-5 valgfag.")
+                            //microhint(ui.draggable, "Du har placeret et kreativt fag. Du skal have et kreativt fag som obligatorisk. Derudover skal du vælge 3-5 valgfag.", true)
+                            microhint_streng += "Du har placeret et kreativt fag. Du skal have et kreativt fag som obligatorisk. Derudover skal du vælge 3-5 valgfag.<br/><br/>";
                         }
                     }
 
@@ -348,6 +377,16 @@ $(document).ready(function() {
                         klon.addClass("clone_valgfag");
 
                     }
+
+                    /*------------- HVIS MERE END 3 FAG ALLEREDE: --------------*/
+
+                    /*if ($(this).find(".fag_btn").length > 3 + $(this).find(".opgave").length) {
+
+                        //microhint($(this), "Hvis du vil have mere end 3 fag pr semester, så skal du tage et eller flere fag på HF Online. Du kan ikke være sikker på at behovet kan opfyldes. <br/>Tal med vejledningen!", true)
+                        microhint_streng += "Hvis du vil have mere end 3 fag pr semester, skal du tage et eller flere fag på HF Online. Du kan ikke være sikker på at behovet kan opfyldes.<br/><br/>";
+                    }*/
+
+                    /*------------- HVIS MERE END 3 FAG ALLEREDCE: --------------*/
 
                 }
 
@@ -400,12 +439,30 @@ $(document).ready(function() {
             var last_letter = ui.draggable.html();
             last_letter = last_letter[last_letter.length - 1]
 
-
+            udregn_timer();
 
             console.log("hej");
 
+            var this_sutimer = parseInt($(this).find(".su_display").html());
 
-            udregn_timer();
+                if (this_sutimer > 30 && $(this).index(".semester_content") != 0) {
+                    console.log("FOR MANGE SU TIMER kaldt")
+                    //microhint($(this), "Du har nu " + this_sutimer + " SU timer i dette semester. Vi anbefaler max 30 timer", true);
+
+                    microhint_streng += "Du har nu " + $(this).find(".su_display").html() + " SU timer i dette semester. Vi anbefaler max 30 timer<br/><br/>"
+
+                }
+
+                if (microhint_streng.length > 30) {
+
+                    microhint_streng = microhint_streng.substring(0, microhint_streng.length - 5);
+                    microhint($(this), microhint_streng);
+                }
+
+            
+
+
+
             set_height_containers();
             sortDivs();
 
@@ -619,9 +676,6 @@ function udregn_timer() {
 
     $(".semester_content").each(function(index) {
 
-
-
-
         saveData.push([]);
 
         var udd_timer = 0;
@@ -706,7 +760,7 @@ function udregn_timer() {
 
 
 
-        su_timer = Math.round( su_timer * 100 ) / 100;
+        su_timer = Math.round(su_timer * 100) / 100;
 
         $(".su_display").eq(index).html(su_timer.toString().replace(".", ","));
         if (su_timer >= 22.9 && su_timer <= 30.5) {
@@ -724,6 +778,11 @@ function udregn_timer() {
 
         //console.log("Num OBL: " + $(".semester_content > .obligatorisk").length + "dup: " + duplicate_fag_Array.length);
         //$(".su_timer").eq(index).html("ost");
+
+        // if ($(this).find(".fag_btn").length > 3) {
+        //   microhint($(this), "OBS! Hvis du vil have mere end 3 fag pr semester, så skal du tage et eller flere fag på HF Online", true)
+        //}
+
     });
 
     if (kreative_fag > 0) {
@@ -796,7 +855,15 @@ function udregn_timer() {
 
     osc.save('timeData', saveData);
 
+    var mh_count = $(".microhint").length;
+    if (mh_count > 1) {
+        $(".microhint").each(function() {
+            $(this).css("margin-left", (100 - Math.random() * 200) + "px").css("margin-top", (20 - Math.random() * 40) + "px");
+        });
+    }
 
+
+    console.log("udregn timer kaldt: " + mh_count);
 
 }
 
@@ -877,7 +944,7 @@ function nav_click(text, object) {
             semestre++;
             $(".semester_container").eq(semestre).fadeIn();
         } else {
-            microhint($(".knap_container"), "Du kan maksimalt arbejde med 18 semestre");
+            microhint($(".knap_container"), "Du kan maksimalt arbejde med 18 semestre", true);
         }
 
         udregn_timer();
@@ -1021,11 +1088,11 @@ function clicked_SU(object) {
     //alert (typeof(SU_timer) + ": " + SU_timer);
     if (SU_timer_Int < 23) {
 
-        microhint(object, SU_timer + " SU-timer er ikke nok til at du kan få SU i " + $(".semester_title").eq(parentID).html() + ". <br/>Du skal have minimum 23 SU-timer om ugen for at være berettiget til SU. <br/>(Du kan nøjes med 17 timer, hvis du har et hjemmeboende barn under syv år.");
+        microhint(object, SU_timer + " SU-timer er ikke nok til at du kan få SU i " + $(".semester_title").eq(parentID).html() + ". <br/>Du skal have minimum 23 SU-timer om ugen for at være berettiget til SU. <br/>(Du kan nøjes med 17 timer, hvis du har et hjemmeboende barn under syv år.", true);
     } else if (SU_timer_Int > 30) {
-        microhint(object, "Du har ret til SU i " + $(".semester_title").eq(parentID).html() + ", men " + SU_timer + " SU-timer er for mange timer i forhold til hvad vi anbefaler om ugen. Prøv at flytte et fag til et andet semester.");
+        microhint(object, "Du har ret til SU i " + $(".semester_title").eq(parentID).html() + ", men " + SU_timer + " SU-timer er for mange timer i forhold til hvad vi anbefaler om ugen. Prøv at flytte et fag til et andet semester.", true);
     } else {
-        microhint(object, SU_timer + " SU-timer gør, at du er berettiget til SU i " + $(".semester_title").eq(parentID).html() + " og er et fornuftigt antal timer på en uge.");
+        microhint(object, SU_timer + " SU-timer gør, at du er berettiget til SU i " + $(".semester_title").eq(parentID).html() + " og er et fornuftigt antal timer på en uge.", true);
     }
 }
 
@@ -1034,11 +1101,11 @@ function clicked_btn_exp(object) {
     console.log("HTML: " + indeks);
 
     if (indeks == 0) {
-        microhint(object, "Du skal have alle fag, der er i de blå bokse. <br/>Derudover skal du skrive SSO (Større Skriftlig Opgave) og en EP (Eksamensprojekt)<br/>Det er også obligatorisk at have ét kreativt valgfag (Musik, Mediefag, Dramatik, Dans eller Billedkunst). <br/><br/><button class='btn_vis_v btn btn-sm btn-info btn-var'>Vis et forslag<span class='custom_glyphs glyphicon glyphicon-folder-open'></span></button>");
+        microhint(object, "Du skal have alle fag, der er i de blå bokse. <br/>Derudover skal du skrive SSO (Større Skriftlig Opgave) og en EP (Eksamensprojekt)<br/>Det er også obligatorisk at have ét kreativt valgfag (Musik, Mediefag, Dramatik, Dans eller Billedkunst). <br/><br/><button class='btn_vis_v btn btn-sm btn-info btn-var'>Vis et forslag<span class='custom_glyphs glyphicon glyphicon-folder-open'></span></button>", true);
     } else if (indeks == 1) {
-        microhint(object, "Du skal have 3-5 valgfag, enten: <br/><br/><ul class='inline_ul'><li>1 fag på 0-B niveau og 2 fag på C-B niveau</li><li>2 fag på 0-B niveau og 1 fag på 0-C niveau</li><li>1 fag på 0-B niveau, 1 fag på C-B niveau og 2 fag på 0-C niveau</li><li>3 fag på C-B niveau og 1 fag på 0-C niveau</li><li>4 fag på C-B niveau</li><li>2 fag på C-B niveau og 3 fag på 0-C niveau</li></ul><br/>Se to eksempler på en uddannelsesplan ved at trykke på knappen: <br/><br/><button class='btn_vis_v btn btn-sm btn-info btn-var'>Vis et forslag<span class='custom_glyphs glyphicon glyphicon-folder-open'></span></button>");
+        microhint(object, "Du skal have 3-5 valgfag, enten: <br/><br/><ul class='inline_ul'><li>1 fag på 0-B niveau og 2 fag på C-B niveau</li><li>2 fag på 0-B niveau og 1 fag på 0-C niveau</li><li>1 fag på 0-B niveau, 1 fag på C-B niveau og 2 fag på 0-C niveau</li><li>3 fag på C-B niveau og 1 fag på 0-C niveau</li><li>4 fag på C-B niveau</li><li>2 fag på C-B niveau og 3 fag på 0-C niveau</li></ul><br/>Se to eksempler på en uddannelsesplan ved at trykke på knappen: <br/><br/><button class='btn_vis_v btn btn-sm btn-info btn-var'>Vis et forslag<span class='custom_glyphs glyphicon glyphicon-folder-open'></span></button>", true);
     } else if (indeks == 2) {
-        microhint(object, "Du skal have to fag på B-A niveau ELLER et B-A niveau og et valgfag der løfter fra C til B-niveau. <br/>Husk at fagene skal være relevante for den uddannelse du drømmer om. <br/><br/><button class='btn_vis_v btn btn-sm btn-info btn-var'>Vis et forslag<span class='custom_glyphs glyphicon glyphicon-folder-open'></span></button>");
+        microhint(object, "Du skal have to fag på B-A niveau ELLER et B-A niveau og et valgfag der løfter fra C til B-niveau. <br/>Husk at fagene skal være relevante for den uddannelse du drømmer om. <br/><br/><button class='btn_vis_v btn btn-sm btn-info btn-var'>Vis et forslag<span class='custom_glyphs glyphicon glyphicon-folder-open'></span></button>", true);
     }
     $(".btn_vis_v").click(function() {
         nav_click("text", $(".btn-var").eq(4));
@@ -1053,7 +1120,7 @@ function clicked_feedback(object) {
 
     HTML += " <ul class='inline_ul'><li> En fuld HF består af 1705  uddannelsestimer</li><li>En udvidet HF består af 1905 timer og giver adgang til universitetet.</li><li> Du skal som minimum have 23 SU-timer i hvert semester, for at modtage SU-støtte. (17 timer, hvis du har et hjemmeboende barn under syv år.) <br/>Vi anbefaler ikke, at du har mere end 30 SU-timer pr. semester. </li><li> Du skal have en bestemt fordeling af fag. Læs mere ved at trykke på:</li> </ul><button class='mh_button_0 btn btn-sm btn-primary btn_exp'>Obligatoriske fag </button>    <button class='mh_button_1 btn btn-sm btn-success btn_exp'>Valgfag </button>";
 
-    microhint(object, HTML)
+    microhint(object, HTML, true)
     $(".mh_button_1").click(function() {
         clicked_btn_exp($(".btn_exp").eq(1));
 
@@ -1135,7 +1202,7 @@ function wordTemplate_1() {
 /*=====  End of Sektion der knytter sig til downloiad af word fil  ======*/
 
 function send_email() {
-    var HTML = "Her er min uddanelsesplan, som jeg håber kan danne baggrund for en samtale om min uddannelse%0D%0A%0D%0A";
+    var HTML = "Her er min uddannelsesplan, som jeg håber kan danne baggrund for en samtale om min uddannelse%0D%0A%0D%0A";
     $(".semester_container").each(function(index) {
         if ($(this).is(":visible")) {
             HTML += $(".semester_title").eq(index).html() + ":%0D%0A";
@@ -1274,6 +1341,8 @@ function autoudfyld(udfyld_type) {
 ============================================*/
 function sortDivs() {
 
+    $(".fag_btn").off("click");
+
 
     var myArray = $(".dragzone .fag_btn");
     var count = 0;
@@ -1325,17 +1394,21 @@ function sortDivs() {
 function addListeners() {
     $(".fag_btn").click(function() {
 
+        //$(".microhint").remove();
+
         var indeks = $(this).attr("id");
         indeks = parseInt(indeks.substring(4, indeks.length));
         var su_string = jsonData.fag[indeks].su_timer.toString();
 
         su_string = su_string.replace(".", ",");
         if (jsonData.fag[indeks].forklaring) {
-            microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b> (" + jsonData.fag[indeks].fagtype + ")<br/><em>" + jsonData.fag[indeks].forklaring + "</em><br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + su_string);
+            microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b> (" + jsonData.fag[indeks].fagtype + ")<br/><em>" + jsonData.fag[indeks].forklaring + "</em><br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + su_string, true);
         } else {
-            microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b> (" + jsonData.fag[indeks].fagtype + ")<br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + su_string);
+            microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b> (" + jsonData.fag[indeks].fagtype + ")<br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + su_string, true);
         }
     });
+
+
 
 }
 
@@ -1399,8 +1472,11 @@ function loadData() {
                     $(".dragzone").find("#" + TjsonData[i][o]).remove();
                 } else {
                     $(".semester_content").eq(i - 1).append(fag);
-                    var klon = fag.clone();
-                    $(".dragzone").append(klon);
+
+                    if ($("#" + TjsonData[i][o]).hasClass("helaar")) {
+                        var klon = fag.clone();
+                        $(".dragzone").append(klon);
+                    }
                 }
 
                 //console.log("NOGET AT FINDE? " + $(".semester_content").find(fag).length); 
@@ -1445,7 +1521,7 @@ function loadData() {
     }
 
     if ($(".dropped").length < 1) {
-        microhint($(".feedback_container"), "<h4>Træk fagene til de forskellige semestre</h4><img src='img/intro.gif' class='drop_gif img-responsive'>");
+        microhint($(".feedback_container"), "<h4>Træk fagene til de forskellige semestre</h4><img src='img/intro.gif' class='drop_gif img-responsive'>", true);
     }
 }
 
@@ -1464,7 +1540,7 @@ function help() {
             if (!$(this).hasClass("clone")) {
                 var indeks = $(this).index(".obligatorisk");
 
-                microhint($(".obligatorisk").eq(indeks), "Du mangler at placere obligatoriske fag, bl.a " + $(".obligatorisk").eq(indeks).html());
+                microhint($(".obligatorisk").eq(indeks), "Du mangler at placere obligatoriske fag, bl.a " + $(".obligatorisk").eq(indeks).html(), true);
                 return false;
             }
 
@@ -1476,7 +1552,7 @@ function help() {
         $(".dragzone").find(".opgave").each(function() {
             var indeks = $(this).index(".opgave");
 
-            microhint($(".opgave").eq(indeks), "Du mangler at placere " + $(".opgave").eq(indeks).html());
+            microhint($(".opgave").eq(indeks), "Du mangler at placere " + $(".opgave").eq(indeks).html(), true);
             return false;
 
         });
@@ -1486,7 +1562,7 @@ function help() {
         var rand_indeks = Math.floor(Math.random() * $(".flexible").length);
 
 
-        microhint($(".flexible").eq(rand_indeks), "Du mangler at placere et kreativt 0-C fag som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
+        microhint($(".flexible").eq(rand_indeks), "Du mangler at placere et kreativt 0-C fag som f.eks " + $(".flexible").eq(rand_indeks).html(), true); // + $(".flexible").eq(indeks).html());
 
 
         $(".instr_top").html("<span class=' glyphicon glyphicon-user'></span> <span>Placer et kreativt fag</span>");
@@ -1555,32 +1631,32 @@ function help() {
 
 
 
-        microhint($(".glyphicon-question-sign"), HTML);
+        microhint($(".glyphicon-question-sign"), HTML, true);
         $(".instr_top").html("<span class=' glyphicon glyphicon-user'></span> <span>Placer flere valgfag, så det passer med kravene til en fuld HF og evt. SU.</span>");
 
     } else if (!$(".udvidet_fag_ok_glyph").hasClass("complete_ok_glyph") && udvidet_fagpakke == true) {
         var rand_indeks = Math.floor(Math.random() * $(".udvidet").length);
 
 
-        microhint($(".udvidet").eq(rand_indeks), "Du mangler at placere et udvidet fagpakkefag."); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
-        $(".instructionText").html("Her kan du planlægge dit HF forløb. Så er du forberedt til vejledning eller tilmelding.  <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Placer 1-2 udvidede fagpakke fag og valgfag så du kommer op på mindst 1905 timer</span>");
+        microhint($(".udvidet").eq(rand_indeks), "Du mangler at placere et udvidet fagpakkefag.", true); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
+        //$(".instructionText").html("Her kan du få inspiration til at planlægge dit HF forløb. <br/>Objektet er et værktøj som kan hjælpe dig til at få overblik over en fuld HF, men KVUC kan ikke garantere, at den plan du laver her kan lade sig gøre i virkeligheden. <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Placer 1-2 udvidede fagpakke fag og valgfag så du kommer op på mindst 1905 timer</span>");
 
 
     } else if (!$(".timer_ok_glyph").hasClass("complete_ok_glyph")) {
         if (totalTimer > max_timer) {
-            microhint($(".btn-var").eq(6), "Du har for mange timer, skift f.eks. et valgfag ud med et der har færre timer eller skift et B-A fag ud med et C-B fag."); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
-            $(".instructionText").html("Her kan du planlægge dit HF forløb. Så er du forberedt til vejledning eller tilmelding.  <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Du har for mange uddannelsestimer.</span>");
+            microhint($(".btn-var").eq(6), "Du har for mange timer, skift f.eks. et valgfag ud med et der har færre timer eller skift et B-A fag ud med et C-B fag.", true); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
+            //$(".instructionText").html("Her kan du planlægge dit HF forløb. Så er du forberedt til vejledning eller tilmelding.  <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Du har for mange uddannelsestimer.</span>");
         } else {
-            $(".instructionText").html("Her kan du planlægge dit HF forløb. Så er du forberedt til vejledning eller tilmelding.  <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Du har for få uddannelsestimer.</span>");
+            //$(".instructionText").html("Her kan du planlægge dit HF forløb. Så er du forberedt til vejledning eller tilmelding.  <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Du har for få uddannelsestimer.</span>");
             if ($("#fag_58").hasClass("dropped")) {
-                microhint($(".btn-var").eq(6), "Du har valgt ikke timer nok til en udvidet HF. <br/>Bemærk at Historie B-A tæller 50 timer (75 timer mindre end de andre B-A fag).<br/> <br/> Vælg et andet B-A fag eller tilføj endnu et valgfag."); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());     
+                microhint($(".btn-var").eq(6), "Du har valgt ikke timer nok til en udvidet HF. <br/>Bemærk at Historie B-A tæller 50 timer (75 timer mindre end de andre B-A fag).<br/> <br/> Vælg et andet B-A fag eller tilføj endnu et valgfag.", true); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());     
             } else {
-                microhint($(".btn-var").eq(6), "Du har ikke timer nok til en fuld HF. <br/> Tilføj et fag mere."); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
+                microhint($(".btn-var").eq(6), "Du har ikke timer nok til en fuld HF. <br/> Tilføj et fag mere.", true); // som f.eks " + $(".flexible").eq(rand_indeks).html()); // + $(".flexible").eq(indeks).html());
             }
         }
     } else {
-        microhint($(".glyphicon-question-sign"), "Du har sammensat en fuld HF <br/> Hent din uddannelsesplan, send en mail til vejledningen eller tag evt. et screenshot af siden.");
-        $(".instr_top").html("Her kan du planlægge dit HF forløb. Så er du forberedt til vejledning eller tilmelding.  <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Du er klar til at gå videre med din studieplan.</span>");
+        microhint($(".glyphicon-question-sign"), "Du har sammensat en fuld HF <br/> Hent din uddannelsesplan, send en mail til vejledningen eller tag evt. et screenshot af siden.", true);
+        //$(".instr_top").html("Her kan du planlægge dit HF forløb. Så er du forberedt til vejledning eller tilmelding.  <br><span class='instr_top'><span class=' glyphicon glyphicon-user'></span> <span>Du er klar til at gå videre med din studieplan.</span>");
     }
 
     $(".instr_top").fadeOut(0).fadeIn(500);
@@ -1610,9 +1686,11 @@ function check_fagprogression(objekt_id, droppable_indeks) {
         })
         if (progressions_problem == true) {
             if (objekt_niveau == "C-B") {
-                setTimeout(function() { microhint($("#" + objekt_id), "For du kan have " + objekt_HTML + " skal du huske at tage " + objekt_fag + " på 0-C niveau i et tidligere semester."); }, 100);
+                return "Før du kan tage " + objekt_HTML + " skal du huske at tage " + objekt_fag + " på 0-C niveau i et tidligere semester.<br/><br/>";
+                setTimeout(function() { microhint($("#" + objekt_id), "Før du kan tage " + objekt_HTML + " skal du huske at tage " + objekt_fag + " på 0-C niveau i et tidligere semester.", true); }, 100);
             } else if (objekt_niveau == "B-A") {
-                setTimeout(function() { microhint($("#" + objekt_id), "For du kan have " + objekt_HTML + " skal du huske at tage " + objekt_fag + " på C-B eller 0-B niveau i et tidligere semester."); }, 100);
+                return "Før du kan tage " + objekt_HTML + " skal du huske at tage " + objekt_fag + " på C-B eller 0-B niveau i et tidligere semester.<br/><br/>";
+                setTimeout(function() { microhint($("#" + objekt_id), "Før du kan tage " + objekt_HTML + " skal du huske at tage " + objekt_fag + " på C-B eller 0-B niveau i et tidligere semester.", true); }, 100);
             }
         }
     }
