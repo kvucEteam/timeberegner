@@ -19,7 +19,7 @@ var valgfag = 0,
     tipTimer,
     mouseAction = 3000,
     startaar = 2018,
-    startsemester = "Efterår",
+    startsemester = "Forår",
     saveData;
 
 
@@ -528,10 +528,10 @@ function init() {
 
         if (i % 2) {
 
-            startsemester = "Efterår";
+            startsemester = "Forår";
 
         } else {
-            startsemester = "Forår";
+            startsemester = "Efterår";
             startaar++;
 
         }
@@ -1243,7 +1243,7 @@ function autoudfyld(udfyld_type) {
     $(".semester_container").eq(0).hide();
 
     if (udfyld_type == "alm") {
-        semestre = 6;
+        semestre = 5;
         //alert ("SÅ er der Pølle!");
         udvidet_fagpakke = false;
         //object.html("Deaktiver udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
@@ -1283,7 +1283,7 @@ function autoudfyld(udfyld_type) {
 
         $(".ba,  .udvidet_fag_status, .udvidet_fag_ok_glyph").fadeIn();
         $(".btn-var").eq(2).html("Skjul udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
-        semestre = 6;
+        semestre = 7;
         min_timer = 1905;
         max_timer = 1955;
 
