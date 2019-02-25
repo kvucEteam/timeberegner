@@ -1,41 +1,4 @@
 {
-    "semesterdimser": [{
-        "header": "Tidligere gennemførte fag (Merit)",
-        "visible": false
-    }, {
-        "header": "Efterår 2018",
-        "visible": true
-    }, {
-        "header": "Forår 2019",
-        "visible": true
-    }, {
-        "header": "Efterår 2019",
-        "visible": true
-    }, {
-        "header": "Forår 2020",
-        "visible": true
-    }, {
-        "header": "Efterår 2020",
-        "visible": false
-    }, {
-        "header": "Forår 2021",
-        "visible": false
-    }, {
-        "header": "Efterår 2021",
-        "visible": false
-    }, {
-        "header": "Forår 2022",
-        "visible": false
-    }, {
-        "header": "Efterår 2022",
-        "visible": false
-    }, {
-        "header": "Forår 2023",
-        "visible": false
-    }, {
-        "header": "Udvidet fagpakke",
-        "visible": false
-    }],
     "knapper": [{
             "tekst": "Tilføj semester <span class='custom_glyphs glyphicon glyphicon-plus'></span>",
             "selectedIndex": 1

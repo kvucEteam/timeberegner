@@ -19,7 +19,6 @@ var valgfag = 0,
     tipTimer,
     mouseAction = 3000,
     startaar = 2018,
-    startsemester = "Forår",
     saveData;
 
 
