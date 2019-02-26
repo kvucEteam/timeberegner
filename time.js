@@ -18,7 +18,10 @@ var valgfag = 0,
     valgfagsstimer = 0,
     tipTimer,
     mouseAction = 3000,
-    startaar = 2018,
+
+    startaar = 2020,
+    startsemester = "Forår",
+
     saveData;
 
 
@@ -444,21 +447,21 @@ $(document).ready(function() {
 
             var this_sutimer = parseInt($(this).find(".su_display").html());
 
-                if (this_sutimer > 30 && $(this).index(".semester_content") != 0) {
-                    console.log("FOR MANGE SU TIMER kaldt")
-                    //microhint($(this), "Du har nu " + this_sutimer + " SU timer i dette semester. Vi anbefaler max 30 timer", true);
+            if (this_sutimer > 30 && $(this).index(".semester_content") != 0) {
+                console.log("FOR MANGE SU TIMER kaldt")
+                //microhint($(this), "Du har nu " + this_sutimer + " SU timer i dette semester. Vi anbefaler max 30 timer", true);
 
-                    microhint_streng += "Du har nu " + $(this).find(".su_display").html() + " SU timer i dette semester. Vi anbefaler max 30 timer<br/><br/>"
+                microhint_streng += "Du har nu " + $(this).find(".su_display").html() + " SU timer i dette semester. Vi anbefaler max 30 timer<br/><br/>"
 
-                }
+            }
 
-                if (microhint_streng.length > 30) {
+            if (microhint_streng.length > 30) {
 
-                    microhint_streng = microhint_streng.substring(0, microhint_streng.length - 5);
-                    microhint($(this), microhint_streng);
-                }
+                microhint_streng = microhint_streng.substring(0, microhint_streng.length - 5);
+                microhint($(this), microhint_streng);
+            }
 
-            
+
 
 
 
@@ -523,17 +526,12 @@ function init() {
 
     $("#semester_app").append("<div class ='semester_container col-lg-3 col-md-4 col-sm-4 col-xs-6'><div class='semester_content '><div class='semester_title'>Tidligere gennemførte fag (Merit)</div><div class='su_timer'> SU timer: <span class='su_display'>0</span> </div>  </div></div>");
 
+
+
     for (var i = 0; i < 20; i++) {
 
-        if (i % 2) {
+        console.log("i: " + i)
 
-            startsemester = "Forår";
-
-        } else {
-            startsemester = "Efterår";
-            startaar++;
-
-        }
 
         $("#semester_app").append("<div class ='semester_container col-lg-3 col-md-4 col-sm-4 col-xs-6'><div class='semester_content '><div class='semester_title'>" + startsemester + " " + startaar + "</div> <div class='su_timer'> SU timer: <span class='su_display'>0</span> </div> </div></div>");
 
@@ -542,6 +540,15 @@ function init() {
             $(".semester_container").eq(i).hide();
         }
         $(".semester_container").eq(20).hide();
+
+        if (startsemester == "Efterår") {
+
+            startaar++;
+
+            startsemester = "Forår";
+        } else {
+            startsemester = "Efterår";
+        }
     }
 
 
@@ -1663,6 +1670,8 @@ function help() {
 
 function check_fagprogression(objekt_id, droppable_indeks) {
 
+
+
     var progressions_problem = true;
 
     var objekt_HTML = $("#" + objekt_id).html();
@@ -1678,7 +1687,7 @@ function check_fagprogression(objekt_id, droppable_indeks) {
             //alert("indeks: " + indeks + ", droppable" + droppable_indeks);
 
 
-            if (dropped_string == objekt_fag && indeks < droppable_indeks) {
+            if (dropped_string == objekt_fag && indeks < droppable_indeks && droppable_indeks != 0) {
 
                 progressions_problem = false;
             }
