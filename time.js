@@ -1,5 +1,14 @@
 var min_timer = 1705;
 var max_timer = 1755;
+
+var min_timer_udvidet = 1905;
+var max_timer_udvidet = 1955;
+
+var min_su_timer = 23;
+var max_su_timer = 30;
+
+
+
 var semestre = 4;
 
 var valgfag = 0,
@@ -19,8 +28,11 @@ var valgfag = 0,
     tipTimer,
     mouseAction = 3000,
 
-    startaar = 2020,
-    startsemester = "Forår",
+
+
+    startaar = 2019,
+    startsemester = "Efterår",
+    maxsemestre = 20,
 
     saveData;
 
@@ -528,7 +540,7 @@ function init() {
 
 
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < maxsemestre; i++) {
 
         console.log("i: " + i)
 
@@ -539,7 +551,7 @@ function init() {
         if (i > semestre) {
             $(".semester_container").eq(i).hide();
         }
-        $(".semester_container").eq(20).hide();
+        $(".semester_container").eq(maxsemestre).hide(); 
 
         if (startsemester == "Efterår") {
 
@@ -769,7 +781,7 @@ function udregn_timer() {
         su_timer = Math.round(su_timer * 100) / 100;
 
         $(".su_display").eq(index).html(su_timer.toString().replace(".", ","));
-        if (su_timer >= 22.9 && su_timer <= 30.5) {
+        if (su_timer > min_su_timer && su_timer <= max_su_timer) {
             $(".su_display").eq(index).addClass("su-success");
             $(".su_display").eq(index).removeClass("su-danger");
         } else {
@@ -989,8 +1001,10 @@ function nav_click(text, object) {
             object.html("Skjul udvidet fagpakke <span class='custom_glyphs glyphicons glyphicons-education'></span>");
             $(".btn_exp").eq(2).fadeIn();
             $(".udvidet_fag_status, .udvidet_fag_ok_glyph, .ba").fadeIn();
-            min_timer = 1905;
-            max_timer = 1955;
+            min_timer = min_timer_udvidet;
+            max_timer = max_timer_udvidet;
+
+            
         }
 
         udregn_timer();
@@ -1092,10 +1106,10 @@ function clicked_SU(object) {
 
 
     //alert (typeof(SU_timer) + ": " + SU_timer);
-    if (SU_timer_Int < 23) {
+    if (SU_timer_Int < min_su_timer) {
 
         microhint(object, SU_timer + " SU-timer er ikke nok til at du kan få SU i " + $(".semester_title").eq(parentID).html() + ". <br/>Du skal have minimum 23 SU-timer om ugen for at være berettiget til SU. <br/>(Du kan nøjes med 17 timer, hvis du har et hjemmeboende barn under syv år.", true);
-    } else if (SU_timer_Int > 30) {
+    } else if (SU_timer_Int > max_su_timer) {
         microhint(object, "Du har ret til SU i " + $(".semester_title").eq(parentID).html() + ", men " + SU_timer + " SU-timer er for mange timer i forhold til hvad vi anbefaler om ugen. Prøv at flytte et fag til et andet semester.", true);
     } else {
         microhint(object, SU_timer + " SU-timer gør, at du er berettiget til SU i " + $(".semester_title").eq(parentID).html() + " og er et fornuftigt antal timer på en uge.", true);
