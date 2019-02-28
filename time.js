@@ -94,6 +94,7 @@ $(document).ready(function() {
 
     $(".btn-var").mouseover(function() {
         var indeks = $(this).index(".btn-var");
+        console.log("Indeks:  " + indeks)
         microhint($(this), jsonData.knaptekster[indeks], true);
     });
 
@@ -1422,11 +1423,13 @@ function addListeners() {
 
         su_string = su_string.replace(".", ",");
         if (jsonData.fag[indeks].forklaring) {
-            microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b> (" + jsonData.fag[indeks].fagtype + ")<br/><em>" + jsonData.fag[indeks].forklaring + "</em><br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + su_string, true);
+            microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b> (" + jsonData.fag[indeks].fagtype + ")<br/><em>" + jsonData.fag[indeks].forklaring + "</em><br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + su_string);
         } else {
-            microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b> (" + jsonData.fag[indeks].fagtype + ")<br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + su_string, true);
+            microhint($(this), "<b>" + jsonData.fag[indeks].text + "</b> (" + jsonData.fag[indeks].fagtype + ")<br/>Uddannelsestimer: " + jsonData.fag[indeks].udd_timer + "<br/>SU-timer: " + su_string);
         }
     });
+
+
 
 
 
