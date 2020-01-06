@@ -30,8 +30,8 @@ var valgfag = 0,
 
 
 
-    startaar = 2019,
-    startsemester = "Efterår",
+    startaar = 2020,
+    startsemester = "Forår",
     maxsemestre = 20,
 
     saveData;
@@ -138,7 +138,7 @@ $(document).ready(function() {
 
         //alert(tilmeld_fag);
 
-        alert(fag + "," + tilmeld_fag);
+        //alert(fag + "," + tilmeld_fag);
         window.open(tilmeld_fag);
 
         //https://tilmeld.kvuc.dk/?SelectedEducationType=Gym&SelectedSubjects=%5B%22Gym%23%23%23Engelsk%22%2C%22Gym%23%23%23Geografi%22%5D
